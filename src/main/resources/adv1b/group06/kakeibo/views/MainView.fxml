@@ -11,11 +11,11 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="収入記録" onAction="#onIncomeRecordButtonPressed"/>
-                <Menu mnemonicParsing="false" text="品目追加" onAction="#onItemAddButtonPressed"/>
-                <Menu mnemonicParsing="false" text="編集" onAction="#onEditButtonPressed"/>
-                <Menu mnemonicParsing="false" text="エクスポート" onAction="#onExportButtonPressed"/>
-                <Menu mnemonicParsing="false" text="設定" onAction="#onSettingButtonPressed"/>
+                <Menu mnemonicParsing="false" text="収入記録" onAction="#onShowIncomeRecordWindowButtonPressed"/>
+                <Menu mnemonicParsing="false" text="品目追加" onAction="#onShowItemAddWindowButtonPressed"/>
+                <Menu mnemonicParsing="false" text="編集" onAction="#onShowEditWindowButtonPressed"/>
+                <Menu mnemonicParsing="false" text="エクスポート" onAction="#onShowExportWindowButtonPressed"/>
+                <Menu mnemonicParsing="false" text="設定" onAction="#onShowSettingWindowButtonPressed"/>
             </menus>
         </MenuBar>
     </top>

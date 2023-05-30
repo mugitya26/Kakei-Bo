@@ -1,8 +1,10 @@
 package adv1b.group06.kakeibo.controller;
 
+import adv1b.group06.kakeibo.MainWindow;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.model.ItemEntity;
+import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -63,28 +65,28 @@ public class MainController {
     }
 
     @FXML
-    public void onIncomeRecordButtonPressed() throws Exception {
-        // Stage s = new IncomeRecordWindow();
-        // s.show();
+    public void onShowIncomeRecordWindowButtonPressed() throws Exception {
+        Stage s = new IncomeRecordWindow(MainWindow.getPrimaryStage());
+        s.show();
     }
 
     @FXML
-    public void onItemAddButtonPressed() {
-
-    }
-
-    @FXML
-    public void onEditButtonPressed() {
+    public void onShowItemAddWindowButtonPressed() {
 
     }
 
     @FXML
-    public void onExportButtonPressed() {
+    public void onShowEditWindowButtonPressed() {
 
     }
 
     @FXML
-    public void onSettingButtonPressed() {
+    public void onShowExportWindowButtonPressed() {
+
+    }
+
+    @FXML
+    public void onShowSettingWindowButtonPressed() {
 
     }
 
