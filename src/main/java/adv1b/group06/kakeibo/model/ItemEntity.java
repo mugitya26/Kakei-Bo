@@ -12,9 +12,9 @@ public class ItemEntity {
     private final IntegerProperty itemPrice;
 
     public ItemEntity(Item item) {
-        this.itemName = new SimpleStringProperty(item.name());
-        this.itemCategory =  new SimpleStringProperty(item.category().toString());
-        this.itemPrice = new SimpleIntegerProperty(item.price());
+        this.itemName = new SimpleStringProperty(item.getName());
+        this.itemCategory =  new SimpleStringProperty(item.getCategory().toString());
+        this.itemPrice = new SimpleIntegerProperty(item.getPrice());
     }
 
     public String getItemName() {
