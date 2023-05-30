@@ -5,7 +5,9 @@ import java.util.List;
 
 public class Category {
     private final String name;
+    public boolean isPayout = true;
     private static final List<Category> categories = getDefaultCategory();
+
     public Category(String categoryName) {
         name = categoryName;
     }
@@ -27,5 +29,10 @@ public class Category {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
