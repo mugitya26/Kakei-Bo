@@ -23,16 +23,16 @@ public class StatisticsInfo {
     }
 
     public void addItem(Item item) {
-        Integer i = detail.get(item.category());
+        Integer i = detail.get(item.getCategory());
         if (i == null) {
             i = 0;
         }
-        detail.put(item.category(), i + item.price());
+        detail.put(item.getCategory(), i + item.getPrice());
 
-        if (item.category().isPayout) {
-            payout += item.price();
+        if (item.getCategory().isPayout) {
+            payout += item.getPrice();
         } else {
-            income += item.price();
+            income += item.getPrice();
         }
     }
 
