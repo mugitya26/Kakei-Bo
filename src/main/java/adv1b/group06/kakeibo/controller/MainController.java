@@ -5,6 +5,7 @@ import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.model.ItemEntity;
 import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
+import adv1b.group06.kakeibo.stages.ExportWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -43,7 +44,7 @@ public class MainController {
 
     private void setViewRecord(List<Item> items) {
         ObservableList<ItemEntity> itemList = FXCollections.observableArrayList();
-        for (Item i: items) {
+        for (Item i : items) {
             itemList.add(new ItemEntity(i));
         }
         table.setItems(itemList);
@@ -51,14 +52,14 @@ public class MainController {
 
     private void setPieChart(List<Item> items) {
         Map<Category, Integer> priceSum = new HashMap<>();
-        for (Item i: items) {
+        for (Item i : items) {
             Category category = i.getCategory();
             int price = i.getPrice();
             int currentSum = priceSum.getOrDefault(category, 0);
-            priceSum.put(category, currentSum+price);
+            priceSum.put(category, currentSum + price);
         }
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        for (Category category: priceSum.keySet()) {
+        for (Category category : priceSum.keySet()) {
             pieChartData.add(new PieChart.Data(category.toString(), priceSum.get(category)));
         }
         pieChart.setData(pieChartData);
@@ -81,8 +82,9 @@ public class MainController {
     }
 
     @FXML
-    public void onShowExportWindowButtonPressed() {
-
+    public void onShowExportWindowButtonPressed() throws Exception {
+        Stage s = new ExportWindow(ExportWindow.getPrimaryStage());
+        s.show();
     }
 
     @FXML
