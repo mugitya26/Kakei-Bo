@@ -52,8 +52,8 @@ public class MainController {
     private void setPieChart(List<Item> items) {
         Map<Category, Integer> priceSum = new HashMap<>();
         for (Item i: items) {
-            Category category = i.category();
-            int price = i.price();
+            Category category = i.getCategory();
+            int price = i.getPrice();
             int currentSum = priceSum.getOrDefault(category, 0);
             priceSum.put(category, currentSum+price);
         }
