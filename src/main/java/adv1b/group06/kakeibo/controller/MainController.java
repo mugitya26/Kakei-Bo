@@ -83,7 +83,7 @@ public class MainController {
 
     @FXML
     public void onShowExportWindowButtonPressed() throws Exception {
-        Stage s = new ExportWindow(ExportWindow.getPrimaryStage());
+        Stage s = new ExportWindow(MainWindow.getPrimaryStage());
         s.show();
     }
 
