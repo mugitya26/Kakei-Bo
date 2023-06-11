@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo.stages;
 
 
+import adv1b.group06.kakeibo.MainWindow;
 import adv1b.group06.kakeibo.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,19 +17,13 @@ import java.io.IOException;
 
 public class ExportWindow extends Stage {
 
-    private static Stage stage;
-
     public ExportWindow(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/ExportView.fxml"));
+        Stage stage2=new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/Exportview.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("外部出力");
-        stage.setScene(scene);
-        MainController controller01 = fxmlLoader.getController();
-        controller01.initTableView();
-
-        ExportWindow.stage = stage;
+        stage2.setTitle("外部出力");
+        stage2.setScene(scene);
+        stage = stage2;
         stage.show();
-
     }
-
 }

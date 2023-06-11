@@ -24,7 +24,7 @@ public class MainWindow extends Application {
         stage.setScene(scene);
         MainController controller01 = fxmlLoader.getController();
         controller01.initTableView();
-        controller01.setData(RecordManagerTest.getRecord(2023, 5, 22));
+        controller01.setData(RecordManagerTest.getRecord(2023, 6, 22));
         MainWindow.stage = stage;
 
         stage.show();
@@ -35,6 +35,6 @@ public class MainWindow extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

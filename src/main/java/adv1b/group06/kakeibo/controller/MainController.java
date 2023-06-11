@@ -8,6 +8,7 @@ import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
 import adv1b.group06.kakeibo.stages.ExportWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
@@ -84,7 +85,6 @@ public class MainController {
     @FXML
     public void onShowExportWindowButtonPressed() throws Exception {
         Stage s = new ExportWindow(MainWindow.getPrimaryStage());
-        s.show();
     }
 
     @FXML
