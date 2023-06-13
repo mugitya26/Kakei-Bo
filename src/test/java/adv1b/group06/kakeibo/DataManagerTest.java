@@ -1,4 +1,4 @@
-package adv1b.group06.kakeibo.test;
+package adv1b.group06.kakeibo;
 
 import java.util.ArrayList;
 import java.util.List;
