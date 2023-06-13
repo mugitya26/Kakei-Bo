@@ -42,7 +42,7 @@ public class ItemJsonObj implements Serializable {
      * @return 自身と同じパラメータのItem
      */
     public Item toItem() {
-        Category category = Category.findCategory(categoryName);
+        Category category = Category.addCategory(categoryName, isPayout);
         return new Item(name, category, price);
     }
 }

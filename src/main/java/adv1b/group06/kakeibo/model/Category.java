@@ -37,36 +37,7 @@ public class Category {
      * @see Category#addCategory(String, boolean)
      */
     public static List<Category> getCategoriesList() {
-        var list = new ArrayList<Category>();
-        for (Category category : categories.values()) {
-            list.add(category);
-        }
-        return list;
-    }
-
-    /**
-     * @deprecated HashMapの初期化でデフォルトの値を設定しているため、この関数を利用する意味がない。
-     */
-    public static List<Category> getDefaultCategory() {
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category("収入", false));
-        categoryList.add(new Category("食料品", true));
-        categoryList.add(new Category("雑貨", true));
-        categoryList.add(new Category("その他", true));
-        return categoryList;
-    }
-
-    /**
-     * 引数の名前と一致するカテゴリを返す。見つからない場合にはnullを返す。
-     * @param name カテゴリの名前
-     * @return カテゴリのインスタンス
-     * @throws nameがnullだった場合に例外を発生させる
-     * @author 荻野
-     */
-    public static Category findCategory(String name) {
-        if (name == null)
-            throw new IllegalArgumentException();
-        return categories.get(name);
+        return new ArrayList<Category>(categories.values());
     }
 
     /**
@@ -94,6 +65,6 @@ public class Category {
     }
 
     public static Category getUnassignedCategory() {
-        return new Category("未割当");
+        return new Category("未割当", true);
     }
 }

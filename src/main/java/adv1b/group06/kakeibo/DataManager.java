@@ -37,7 +37,7 @@ public class DataManager {
      * 月を指定して統計を計算する
      * @param year
      * @param month
-     * @return　計算結果
+     * @return 計算結果
      */
     public static StatisticsInfo getMonthStaticsData(int year, int month) {
         StatisticsInfo statisticsInfo = new StatisticsInfo(year, month);
