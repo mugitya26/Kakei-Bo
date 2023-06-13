@@ -3,7 +3,6 @@ package adv1b.group06.kakeibo;
 import java.util.ArrayList;
 import java.util.List;
 
-import adv1b.group06.kakeibo.DataManager;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.model.StatisticsInfo;
