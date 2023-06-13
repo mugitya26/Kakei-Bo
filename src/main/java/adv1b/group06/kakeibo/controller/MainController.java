@@ -11,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -31,8 +28,6 @@ public class MainController {
     public TableColumn<ItemEntity, Category> categoryColumn;
     public TableColumn<ItemEntity, Integer> priceColumn;
     public PieChart pieChart;
-
-    public Button cancel;
 
     public MenuBar menuBar;
 
