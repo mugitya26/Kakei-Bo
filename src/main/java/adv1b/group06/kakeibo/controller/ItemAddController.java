@@ -70,7 +70,7 @@ public class ItemAddController {
 
         ITesseract tesseract = new Tesseract();
         tesseract.setLanguage("jpn");
-        tesseract.setDatapath("C:\\Users\\eugle\\Desktop\\OCSTEST\\data");
+        tesseract.setDatapath("Path"); // need Change
         List<String> data = new ArrayList<>();
 
 
