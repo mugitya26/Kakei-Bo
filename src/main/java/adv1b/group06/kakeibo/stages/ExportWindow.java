@@ -16,14 +16,20 @@ import javafx.application.Application;
 import java.io.IOException;
 
 public class ExportWindow extends Stage {
-
+    private static ExportWindow stage;
     public ExportWindow(Stage stage) throws IOException {
-        Stage stage2=new Stage();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/Exportview.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage2.setTitle("外部出力");
-        stage2.setScene(scene);
-        stage = stage2;
+        initOwner(stage);
+        setTitle("外部出力");
+        setScene(scene);
+        ExportWindow controller = fxmlLoader.getController();
+        controller.initTableView();
         stage.show();
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }
