@@ -9,9 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -28,7 +26,19 @@ public class MainController {
     public TableColumn<ItemEntity, Category> categoryColumn;
     public TableColumn<ItemEntity, Integer> priceColumn;
     public PieChart pieChart;
+    public MenuBar menuBar;
 
+
+    public void initMenuButton() {
+        // ダミーのMenuItemを追加することでMenuをクリックしたときに動作するように．
+        ObservableList<Menu> mList = menuBar.getMenus();
+        for(Menu menu: mList) {
+            final MenuItem menuItem = new MenuItem();
+            menu.getItems().add(menuItem);
+            menu.addEventHandler(Menu.ON_SHOWN, event -> menu.hide());
+            menu.addEventHandler(Menu.ON_SHOWING, event -> menu.fire());
+        }
+    }
     public void initTableView() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("itemCategory"));
