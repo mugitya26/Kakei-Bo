@@ -37,7 +37,7 @@ public class ExportController implements Initializable {
     private String[] monthData={"1","2","3","4","5","6","7","8","9","10","11","12"};
 
     private String[] getYearsArray(){
-        int startYear = 1990;
+        int startYear = 2000;
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int yearsCount = currentYear - startYear + 1;
         String[] yearsArray = new String[yearsCount];
@@ -47,7 +47,7 @@ public class ExportController implements Initializable {
         return yearsArray;
     }
 
-    private int getMonth(){
+    private int getMonthIndex(){
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.MONTH);
     }
@@ -57,7 +57,7 @@ public class ExportController implements Initializable {
         years.getItems().addAll(getYearsArray());
         years.getSelectionModel().select(getYearsArray().length-1);
         month.getItems().addAll(monthData);
-        month.getSelectionModel().select(getMonth());
+        month.getSelectionModel().select(getMonthIndex());
     }
     @FXML
     private void exit() {

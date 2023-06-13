@@ -42,5 +42,4 @@ public class Item {
             throw new IllegalArgumentException("priceは0以上でなければなりません");
         this.price = price;
     }
-
 }

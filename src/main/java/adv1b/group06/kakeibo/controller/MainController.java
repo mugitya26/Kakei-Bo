@@ -14,6 +14,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +23,11 @@ import java.util.Map;
 public class MainController {
 
 
-    public TableView<ItemEntity> table;
 
-    public TableColumn<ItemEntity, String> nameColumn;
-    public TableColumn<ItemEntity, Category> categoryColumn;
-    public TableColumn<ItemEntity, Integer> priceColumn;
+    public TableView<Item> table;
+    public TableColumn<Item, String> nameColumn;
+    public TableColumn<Item, String> categoryColumn;
+    public TableColumn<Item, Integer> priceColumn;
     public PieChart pieChart;
 
     public MenuBar menuBar;
@@ -56,12 +57,10 @@ public class MainController {
     }
 
     private void setViewRecord(List<Item> items) {
-        ObservableList<ItemEntity> itemList = FXCollections.observableArrayList();
-        for (Item i : items) {
-            itemList.add(new ItemEntity(i));
-        }
+        ObservableList<Item> itemList = FXCollections.observableArrayList(items);
         table.setItems(itemList);
     }
+
 
     private void setPieChart(List<Item> items) {
         Map<Category, Integer> priceSum = new HashMap<>();
@@ -97,6 +96,7 @@ public class MainController {
     @FXML
     public void onShowExportWindowButtonPressed() throws Exception {
         Stage s = new ExportWindow(MainWindow.getPrimaryStage());
+        s.show();
     }
 
     @FXML

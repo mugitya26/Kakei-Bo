@@ -21,12 +21,10 @@ public class ExportWindow extends Stage {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/Exportview.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        initOwner(stage);
         setTitle("外部出力");
         setScene(scene);
-        ExportWindow controller = fxmlLoader.getController();
-        controller.initTableView();
-        stage.show();
+        initOwner(stage);
+        stage=this;
     }
 
     public static Stage getStage() {
