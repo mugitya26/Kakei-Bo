@@ -5,6 +5,7 @@ import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.model.ItemEntity;
 import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
+import adv1b.group06.kakeibo.stages.ItemAddWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,8 +73,9 @@ public class MainController {
     }
 
     @FXML
-    public void onShowItemAddWindowButtonPressed() {
-
+    public void onShowItemAddWindowButtonPressed() throws IOException {
+        Stage s = new ItemAddWindow(MainWindow.getPrimaryStage());
+        s.show();
     }
 
     @FXML
