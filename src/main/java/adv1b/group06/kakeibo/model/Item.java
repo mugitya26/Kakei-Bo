@@ -1,5 +1,11 @@
 package adv1b.group06.kakeibo.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 public class Item {
     private String name;
     private Category category;
@@ -42,5 +48,15 @@ public class Item {
             throw new IllegalArgumentException("priceは0以上でなければなりません");
         this.price = price;
     }
+    public StringProperty nameProperty() {
+        return new SimpleStringProperty(name);
+    }
 
+    public StringProperty categoryProperty() {
+        return new SimpleStringProperty(category.toString());
+    }
+
+    public ObservableValue<Integer> getPriceObservable() {
+        return new SimpleIntegerProperty(this.price).asObject();
+    }
 }

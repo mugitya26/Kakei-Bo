@@ -92,4 +92,8 @@ public class Category {
     public int hashCode() {
         return name.hashCode();
     }
+
+    public static Category getUnassignedCategory() {
+        return new Category("未割当");
+    }
 }

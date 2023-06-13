@@ -22,9 +22,10 @@ public class MainWindow extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Kakei-Bo");
         stage.setScene(scene);
-        MainController controller01 = fxmlLoader.getController();
-        controller01.initTableView();
-        controller01.setData(RecordManagerTest.getRecord(2023, 6, 22));
+        MainController controller = fxmlLoader.getController();
+        controller.initMenuButton();
+        controller.initTableView();
+        controller.setData(RecordManagerTest.getRecord(2023, 6, 22));
         MainWindow.stage = stage;
 
         stage.show();
@@ -35,6 +36,6 @@ public class MainWindow extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
