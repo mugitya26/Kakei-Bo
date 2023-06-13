@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.ExportController" >
 
 
     <AnchorPane maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -19,17 +19,17 @@
                 <Font size="27.0" />
             </font>
         </Label>
-        <CheckBox layoutX="56.0" layoutY="261.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="CSV(.csv)">
+        <CheckBox fx:id="csv" layoutX="56.0" layoutY="261.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="CSV(.csv)">
             <font>
                 <Font size="18.0" />
             </font>
         </CheckBox>
-        <CheckBox layoutX="56.0" layoutY="305.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Excel(.xlsx)">
+        <CheckBox layoutX="56.0" layoutY="305.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Excel(.xlsx)" fx:id="xlsx">
             <font>
                 <Font size="18.0" />
             </font>
         </CheckBox>
-        <CheckBox layoutX="56.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="PDF(.pdf)">
+        <CheckBox fx:id="pdf" layoutX="56.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="PDF(.pdf)">
             <font>
                 <Font size="18.0" />
             </font>
@@ -45,12 +45,12 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox layoutX="57.0" layoutY="130.0" prefHeight="25.0" prefWidth="59.0" />
+        <ChoiceBox fx:id="years" layoutX="57.0" layoutY="130.0" prefHeight="25.0" prefWidth="59.0" />
         <Label layoutX="131.0" layoutY="134.0" text="年" />
-        <ChoiceBox layoutX="159.0" layoutY="130.0" prefHeight="25.0" prefWidth="39.0" />
+        <ChoiceBox fx:id="month" layoutX="159.0" layoutY="130.0" prefHeight="25.0" prefWidth="39.0" />
         <Label layoutX="210.0" layoutY="134.0" text="月" />
-        <Button layoutX="253.0" layoutY="446.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="48.0" text="決定" />
-        <Button layoutX="314.0" layoutY="446.0" mnemonicParsing="false" text="キャンセル" />
+        <Button fx:id="export" layoutX="253.0" layoutY="446.0" mnemonicParsing="false" onAction="#ExportFile" prefHeight="2.0" prefWidth="48.0" text="決定" />
+        <Button fx:id="cancel" layoutX="314.0" layoutY="446.0" mnemonicParsing="false" onAction="#exit" text="キャンセル" />
       <Line endX="288.0" layoutX="96.0" layoutY="179.0" startX="-78.0" />
     </AnchorPane>
 </VBox>
