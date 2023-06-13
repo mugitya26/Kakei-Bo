@@ -15,16 +15,12 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.MainController">
     <top>
-        <MenuBar BorderPane.alignment="CENTER">
+        <MenuBar BorderPane.alignment="CENTER" fx:id="menuBar">
             <menus>
                 <Menu mnemonicParsing="false" onAction="#onShowIncomeRecordWindowButtonPressed" text="収入記録" />
                 <Menu mnemonicParsing="false" onAction="#onShowItemAddWindowButtonPressed" text="品目追加" />
                 <Menu mnemonicParsing="false" onAction="#onShowEditWindowButtonPressed" text="編集" />
-                <Menu mnemonicParsing="false" text="エクスポート">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onShowExportWindowButtonPressed" text="エクスポート" />
-                    </items>
-                </Menu>
+                <Menu mnemonicParsing="false" onAction="#onShowExportWindowButtonPressed" text="エクスポート"/>
                 <Menu mnemonicParsing="false" onAction="#onShowSettingWindowButtonPressed" text="設定" />
             </menus>
         </MenuBar>
