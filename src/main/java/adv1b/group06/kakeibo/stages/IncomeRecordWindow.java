@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class IncomeRecordWindow extends Stage {
 
     public IncomeRecordWindow(Stage stage) throws Exception {
-
+        initOwner(stage);
     }
 }
 

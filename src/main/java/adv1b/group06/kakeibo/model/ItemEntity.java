@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+@Deprecated
 public class ItemEntity {
     private final StringProperty itemName;
     private final StringProperty itemCategory;

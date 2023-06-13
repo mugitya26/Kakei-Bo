@@ -26,6 +26,7 @@ public class MainWindow extends Application {
         controller.initMenuButton();
         controller.initTableView();
         controller.setData(RecordManagerTest.getRecord(2023, 6, 22));
+        MainWindow.stage = stage;
 
         stage.show();
     }
