@@ -131,14 +131,16 @@ public class ExportController implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("出力先を選択");
         selectedDirectory = directoryChooser.showDialog(exportDirectory.getScene().getWindow());
-        selectedFolderPath = selectedDirectory.getAbsolutePath();
-        selectedFolderPath = selectedFolderPath.replace("\\", "\\\\") + "\\\\";
-        folder.setText(selectedFolderPath);
-        folder.setStyle("-fx-text-fill: black;");
-        if (!fileName.getText().equals("")) {
-            newFileName = fileName.getText();
+        if(selectedFolderPath!=null) {
+            selectedFolderPath = selectedDirectory.getAbsolutePath();
+            selectedFolderPath = selectedFolderPath.replace("\\", "\\\\") + "\\\\";
+            folder.setText(selectedFolderPath);
+            folder.setStyle("-fx-text-fill: black;");
+            if (!fileName.getText().equals("")) {
+                newFileName = fileName.getText();
+            }
+            selectedFolderPath += newFileName;
         }
-        selectedFolderPath += newFileName;
     }
 
 
