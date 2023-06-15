@@ -3,17 +3,13 @@ package adv1b.group06.kakeibo;
 import adv1b.group06.kakeibo.model.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ExportFile {
-
-
     public static int generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
         List<DateItem> date = new ArrayList<>();
@@ -28,10 +24,10 @@ public class ExportFile {
         if (date.isEmpty()) return -1;
 
         try (FileWriter writer = new FileWriter(filePath + ".csv")) {
+
             // CSVヘッダーを書き込む
             writer.append("日付,カテゴリ,商品名,支出");
             writer.append("\n");
-
             for (DateItem item : date) {
                 writer.append(String.format("%04d-%02d-%02d", year, month, Integer.parseInt(item.getDate())));
                 writer.append(",");
@@ -41,10 +37,7 @@ public class ExportFile {
                 writer.append(",");
                 writer.append(Integer.toString(item.getPrice()));
                 writer.append("\n");
-
-
             }
-
             System.out.println("CSVファイルの書き込みが完了しました。");
 
         } catch (IOException e) {
@@ -79,8 +72,7 @@ public class ExportFile {
             headerRow.createCell(3).setCellValue("支出");
 
             int rowCount = 1;
-
-
+            
             for (DateItem item : date) {
                 Row row = sheet.createRow(rowCount++);
                 row.createCell(0).setCellValue(String.format("%04d-%02d-%02d", year, month, Integer.parseInt(item.getDate())));
