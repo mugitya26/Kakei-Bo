@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="500.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.ExportController">
+
+
+    <AnchorPane maxWidth="-1.0" prefHeight="303.0" prefWidth="500.0" VBox.vgrow="ALWAYS">
+        <CheckBox fx:id="csv" layoutX="51.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="CSV(.csv)">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </CheckBox>
+        <CheckBox layoutX="164.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Excel(.xlsx)" fx:id="xlsx">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </CheckBox>
+        <Label fx:id="choiceFile" layoutX="25.0" layoutY="94.0" text="出力したいファイル形式を選択">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="26.0" layoutY="19.0" text="出力したい月を選択">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <ChoiceBox fx:id="years" layoutX="50.0" layoutY="51.0" prefHeight="25.0" prefWidth="59.0" onAction="#updateFileName" />
+        <Label layoutX="119.0" layoutY="55.0" text="年" />
+        <ChoiceBox fx:id="month" layoutX="149.0" layoutY="51.0" prefHeight="25.0" prefWidth="39.0" onAction="#updateFileName"/>
+        <Label layoutX="197.0" layoutY="55.0" text="月" />
+        <Button fx:id="export" layoutX="343.0" layoutY="225.0" mnemonicParsing="false" onAction="#Export" prefHeight="25.0" prefWidth="62.0" text="決定" />
+        <Button fx:id="cancel" layoutX="414.0" layoutY="225.0" mnemonicParsing="false" onAction="#exit" text="キャンセル" />
+      <Button fx:id="exportDirectory" layoutX="408.0" layoutY="186.0" mnemonicParsing="false" onAction="#onExportDirectoryButtonPressed" prefHeight="25.0" prefWidth="59.0" text="出力先" />
+      <TextField fx:id="fileName" layoutX="35.0" layoutY="161.0" prefHeight="25.0" prefWidth="365.0" promptText="ファイル名を入力(デフォルト:YYYY-mm)" />
+      <Label fx:id="folder" alignment="TOP_LEFT" layoutX="35.0" layoutY="190.0" prefHeight="34.0" prefWidth="365.0" wrapText="true" />
+      <Button layoutX="408.0" layoutY="159.0" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="59.0" text="クリア" />
+    </AnchorPane>
+</VBox>
