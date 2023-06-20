@@ -34,6 +34,10 @@ build/
 
 ### VS Code ###
 .vscode/
+*.code-workspace
 
 ### Mac OS ###
 .DS_Store
+
+# Jsonファイルが配置されているディレクトリ
+/src/main/resources/adv1b/group06/kakeibo/data

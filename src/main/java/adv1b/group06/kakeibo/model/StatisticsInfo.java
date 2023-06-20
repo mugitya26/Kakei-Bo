@@ -12,7 +12,7 @@ public class StatisticsInfo {
     private Integer payout;
 
     public StatisticsInfo(int year, int month) {
-        if (year < 1900 || month <= 0 || month > 12) {
+        if (year < 2000 || month <= 0 || month > 12) {
             throw new IllegalArgumentException("無効な月が指定されました。");
         }
         detail = new HashMap<>();
