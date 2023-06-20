@@ -26,11 +26,11 @@ import com.google.gson.stream.JsonWriter;
 
 import java.util.List;
 
+/**
+ * 設定処理部クラス
+ * @author 町田
+ */
 public class SettingManager {
-    /**
-     * 設定処理部クラス
-     * @author 町田
-     */
     private static Stage stage;
     private static Gson gson = new Gson();
     private static JsonObject obj = new JsonObject();
@@ -51,9 +51,9 @@ public class SettingManager {
     public void main(String[] arg) {
     }
 
+    /** 言語の設定変更メソッド */
     @FXML
     public void changeLan() throws IOException {
-        /** 言語の設定変更メソッド */
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/settingLan.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("言語設定");
@@ -64,11 +64,11 @@ public class SettingManager {
         stage.show();
     }
 
+    /**
+     * 言語の設定を英語に変更するメソッド
+     */
     @FXML
     public void changeLanToEnglish() {
-        /**
-         * 言語の設定を英語に変更するメソッド
-         */
         Setting setting;
         String fontSize;
         String lan;
@@ -89,11 +89,11 @@ public class SettingManager {
         }
     }
 
+    /**
+     * 言語の設定を日本語に変更するメソッド
+     */
     @FXML
     public void changeLanToJapanese() {
-        /**
-         * 言語の設定を日本語に変更するメソッド
-         */
         Setting setting;
         String fontSize;
         String lan;
@@ -113,11 +113,12 @@ public class SettingManager {
         }
     }
 
+    /**
+     * 色を変更画面に遷移するメソッド
+     */
     @FXML
     public void changeColor() throws IOException {
-        /**
-         * 色を変更画面に遷移するメソッド
-         */
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/settingColor.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("色彩設定");
@@ -127,11 +128,13 @@ public class SettingManager {
 
         stage.show();
     }
+
+    /**
+     * 色を変更するメソッド
+     */
     @FXML
     public void settingColor(ActionEvent event){
-        /**
-         * 色を変更するメソッド
-         */
+
         Color mycolor =colorPicker.getValue();
         pane.setBackground((new Background(new BackgroundFill(mycolor,null,null))));
         Setting setting;
@@ -151,11 +154,12 @@ public class SettingManager {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 文字サイズの設定画面への遷移メソッド
+     */
     @FXML
     public void changeLetterSize() throws IOException {
-        /**
-         * 文字サイズの設定画面への遷移メソッド
-         */
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/settingLetterSize.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("文字サイズ設定");
@@ -166,11 +170,11 @@ public class SettingManager {
         stage.show();
     }
 
+    /**
+     * 文字を大きくするメソッド
+     */
     @FXML
     public double enlargeLetter() {
-        /**
-         * 文字を大きくするメソッド
-         */
         try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader("setting.json")))) {
             String fontSize = obj.get("fontSize").toString();
             return (Double.parseDouble((fontSize)) + 1);
@@ -180,22 +184,26 @@ public class SettingManager {
         return 0;
     }
 
+    /**
+     * 文字を小さくするメソッド
+     */
     @FXML
     public double reduceLetter() {
-        /**
-         * 文字を小さくするメソッド
-         */
         String fontSize = obj.get("fontSize").toString();
         return (Double.parseDouble((fontSize)) - 1);
     }
 
+    /**
+     * @author 町田
+     * 設定要素のクラス
+     */
     public class Setting {
         private String fontSize;
         private String language;
         private String color;
 
         /**
-         * 設定の要素のクラス
+         * 設定の要素のコンストラクタ
          * @param fontSize フォントのサイズ
          * @param language　言語
          * @param color　　　色
