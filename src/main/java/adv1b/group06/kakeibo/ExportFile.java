@@ -9,7 +9,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * M4-1 外部出力処理を行うクラス
+ * @author 西野奨真
+ */
 public class ExportFile {
+    /**
+     * 年と月と出力先のパスを指定して家計簿のデータCSVに出力する
+     * @param year
+     * @param month
+     * @param filePath
+     * @return int
+     */
     public static int generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
         List<DateItem> date = new ArrayList<>();
@@ -46,6 +57,13 @@ public class ExportFile {
         return 0;
     }
 
+    /**
+     * 年と月と出力先のパスを指定して家計簿のデータをxlsxファイルを出力する
+     * @param year
+     * @param month
+     * @param filePath
+     * @return int
+     */
     public static int generateXlsx(int year, int month, String filePath) {
         List<Item> kakeiboData;
         List<DateItem> date = new ArrayList<>();

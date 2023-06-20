@@ -15,7 +15,6 @@ import java.io.*;
 public class ExportController implements Initializable {
 
     public CheckBox csv;
-    public CheckBox pdf;
     @FXML
     public ChoiceBox<String> years;
     @FXML
@@ -83,7 +82,7 @@ public class ExportController implements Initializable {
     }
 
     @FXML
-    private void Export() throws Exception {
+    private void export() throws Exception {
         int year = Integer.parseInt(years.getValue());
         int month = Integer.parseInt(this.month.getValue());
         boolean XLSX = xlsx.isSelected();

@@ -38,7 +38,7 @@
         <Label layoutX="119.0" layoutY="55.0" text="年" />
         <ChoiceBox fx:id="month" layoutX="149.0" layoutY="51.0" prefHeight="25.0" prefWidth="39.0" onAction="#updateFileName"/>
         <Label layoutX="197.0" layoutY="55.0" text="月" />
-        <Button fx:id="export" layoutX="343.0" layoutY="225.0" mnemonicParsing="false" onAction="#Export" prefHeight="25.0" prefWidth="62.0" text="決定" />
+        <Button fx:id="export" layoutX="343.0" layoutY="225.0" mnemonicParsing="false" onAction="#export" prefHeight="25.0" prefWidth="62.0" text="決定" />
         <Button fx:id="cancel" layoutX="414.0" layoutY="225.0" mnemonicParsing="false" onAction="#exit" text="キャンセル" />
       <Button fx:id="exportDirectory" layoutX="408.0" layoutY="186.0" mnemonicParsing="false" onAction="#onExportDirectoryButtonPressed" prefHeight="25.0" prefWidth="59.0" text="出力先" />
       <TextField fx:id="fileName" layoutX="35.0" layoutY="161.0" prefHeight="25.0" prefWidth="365.0" promptText="ファイル名を入力(デフォルト:YYYY-mm)" />
