@@ -4,6 +4,7 @@ module adv1b.group06.kakeibo {
     requires com.google.gson;
     requires java.desktop;
     requires tess4j;
+    requires org.apache.poi.ooxml;
 
 
     opens adv1b.group06.kakeibo to javafx.fxml;

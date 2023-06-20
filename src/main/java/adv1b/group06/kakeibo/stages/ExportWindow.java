@@ -1,33 +1,26 @@
 package adv1b.group06.kakeibo.stages;
 
-
-import adv1b.group06.kakeibo.MainWindow;
-import adv1b.group06.kakeibo.controller.MainController;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.application.Application;
-
 import java.io.IOException;
 
-public class ExportWindow extends Stage {
-    private static ExportWindow stage;
-    public ExportWindow(Stage stage) throws IOException {
+/**
+ * 外部出力処理を行う際のウィンドウのstage
+ * @author 西野奨真
+ */
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/Exportview.fxml"));
+public class ExportWindow extends Stage {
+    /**
+     *
+     * @param stage
+     * @throws IOException
+     */
+    public ExportWindow(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/ExportView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         setTitle("外部出力");
         setScene(scene);
         initOwner(stage);
-        stage=this;
-    }
-
-    public static Stage getStage() {
-        return stage;
     }
 }
