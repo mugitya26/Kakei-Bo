@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javafx.application.Application.launch;
+
 /**
  * M4-1 外部出力処理を行うクラス
  * @author 西野奨真
@@ -19,7 +21,7 @@ public class ExportFile {
      * @param year
      * @param month
      * @param filePath
-     * @return int
+     * @return 指定された月のデータが存在しない場合は-1を返し、出力に成功した場合は0を返す
      */
     public static int generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
@@ -62,7 +64,7 @@ public class ExportFile {
      * @param year
      * @param month
      * @param filePath
-     * @return int
+     * @return 指定された月のデータが存在しない場合は-1を返し、出力に成功した場合は0を返す
      */
     public static int generateXlsx(int year, int month, String filePath) {
         List<Item> kakeiboData;

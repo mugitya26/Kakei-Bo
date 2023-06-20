@@ -6,12 +6,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.util.*;
 import java.net.URL;
+
 import javafx.stage.DirectoryChooser;
+
 import java.io.*;
 
-
+/**
+ * ExportWindowに関するコントローラークラス
+ * @author 西野奨真
+ */
 public class ExportController implements Initializable {
 
     public CheckBox csv;
@@ -41,6 +47,10 @@ public class ExportController implements Initializable {
     File selectedDirectory;
     String selectedFolderPath;
 
+    /**
+     * 今年が何年かを取得し、2000年から今年までの年を配列として返す
+     * @return String[]
+     */
     private String[] getYearsArray() {
         int startYear = 2000;
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -52,11 +62,20 @@ public class ExportController implements Initializable {
         return yearsArray;
     }
 
+    /**
+     * 今月が何月かを取得し、配列monthDataのインデックスを返す
+     * @return int
+     */
     private int getMonthIndex() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.MONTH);
     }
 
+    /**
+     * javafxのChoiceBoxに年と月の選択肢を追加する
+     * @param arg0
+     * @param arg1
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         years.getItems().addAll(getYearsArray());
@@ -65,6 +84,9 @@ public class ExportController implements Initializable {
         month.getSelectionModel().select(getMonthIndex());
     }
 
+    /**
+     * 年と月を選択するたびに外部出力する際、年と月を更新するごとにデフォルトのファイル名を設定する。
+     */
     @FXML
     public void updateFileName() {
         String selectedYear = years.getValue();
@@ -75,14 +97,20 @@ public class ExportController implements Initializable {
         }
     }
 
+    /**
+     * キャンセルボタンを押したときに画面を閉じる
+     */
     @FXML
     private void exit() {
         Stage currentStage = (Stage) cancel.getScene().getWindow();
         currentStage.close();
     }
 
+    /**
+     * 決定ボタンを押した際の外部出力処理を行うUIの処理と、ExportFileクラスの各メソッドの呼び出し
+     */
     @FXML
-    private void export() throws Exception {
+    private void export() {
         int year = Integer.parseInt(years.getValue());
         int month = Integer.parseInt(this.month.getValue());
         boolean XLSX = xlsx.isSelected();
@@ -122,12 +150,15 @@ public class ExportController implements Initializable {
         }
     }
 
+    /**
+     * ファイルの出力先のバスとファイル名を設定する
+     */
     @FXML
     public void onExportDirectoryButtonPressed() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("出力先を選択");
         selectedDirectory = directoryChooser.showDialog(exportDirectory.getScene().getWindow());
-        if(selectedFolderPath!=null) {
+        if (selectedDirectory != null) {
             selectedFolderPath = selectedDirectory.getAbsolutePath();
             selectedFolderPath = selectedFolderPath.replace("\\", "\\\\") + "\\\\";
             folder.setText(selectedFolderPath);
@@ -139,7 +170,9 @@ public class ExportController implements Initializable {
         }
     }
 
-
+    /**
+     * クリアボタンを押すと、名前がクリアされる
+     */
     @FXML
     public void clear() {
         fileName.clear();
