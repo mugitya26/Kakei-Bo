@@ -3,6 +3,7 @@ module adv1b.group06.kakeibo {
     requires javafx.fxml;
     requires java.desktop;
     requires tess4j;
+    requires javafx.swing;
 
 
     opens adv1b.group06.kakeibo to javafx.fxml;

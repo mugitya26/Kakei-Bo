@@ -1,9 +1,9 @@
 package adv1b.group06.kakeibo.controller;
 
-import adv1b.group06.kakeibo.MainWindow;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.DateItem;
 import adv1b.group06.kakeibo.stages.ItemAddWindow;
+import adv1b.group06.kakeibo.stages.OCRWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,9 +21,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemAddController {
 
@@ -59,29 +61,9 @@ public class ItemAddController {
         priceColumn.setCellFactory(param -> new PriceTableCell());
     }
 
-    public void onReadReceiptButtonPressed() throws TesseractException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("レシート読み込み");
-        List<File> files = fileChooser.showOpenMultipleDialog(ItemAddWindow.getStage());
-        if (files == null || files.size() == 0) {
-            return;
-        }
-
-
-        ITesseract tesseract = new Tesseract();
-        tesseract.setLanguage("jpn");
-        tesseract.setDatapath("Path"); // need Change
-        List<String> data = new ArrayList<>();
-
-
-        for (File file: files) {
-            try {
-                BufferedImage img = ImageIO.read(file);
-            } catch (IOException e) {
-                continue;
-            }
-            data.add(tesseract.doOCR(file));
-        }
+    public void onReadReceiptButtonPressed() throws TesseractException, IOException {
+        Stage stage = new OCRWindow();
+        stage.show();
 
     }
 
@@ -153,4 +135,6 @@ public class ItemAddController {
             }
         }
     }
+
+
 }
