@@ -17,6 +17,7 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -107,11 +108,11 @@ public class OCRController {
      */
     public void onNextButtonPressed() throws IOException {
         if (selectingItemArea) {
-            itemImage = snipImage(itemStartPoint, itemEndPoint, "item");
+            itemImage = snipImage(itemStartPoint, itemEndPoint);
             label.setText(priceSnipLabel);
             selectingItemArea = false;
         } else {
-            BufferedImage priceImage = snipImage(priceStartPoint, priceEndPoint, "price");
+            BufferedImage priceImage = snipImage(priceStartPoint, priceEndPoint);
             doOCR(itemImage, priceImage);
             OCRWindow.getStage().close();
         }
@@ -130,22 +131,27 @@ public class OCRController {
      * 切り取った部分の画像を保存する
      * @param startPoint 始点
      * @param endPoint 終点
-     * @param filepath ファイル名
      */
-    private BufferedImage snipImage(Point2D startPoint, Point2D endPoint, String filepath) throws IOException {
-        // WIP
-        double scaleX = imageView.getImage().getWidth() / imageView.getFitWidth();
-        double scaleY = imageView.getImage().getHeight() / imageView.getFitHeight();
-        System.out.println(scaleX);
+    private BufferedImage snipImage(Point2D startPoint, Point2D endPoint) throws IOException {
+        BufferedImage originImg = ImageIO.read(new File(imageView.getImage().getUrl().replaceFirst("file:/", "")));
+        // ここのscaleがうまく計算できてない
+        double scaleX = originImg.getWidth() / imageView.getImage().getWidth();
+        double scaleY = originImg.getHeight() / imageView.getImage().getHeight();
+        
         int width = (int) ((endPoint.getX() - startPoint.getX()) * scaleX);
         int height = (int) ((endPoint.getY() - startPoint.getY()) * scaleY);
+        System.out.println(imageView.getImage().getUrl().replaceFirst("file:/", ""));
 
-        WritableImage snippedImage = new WritableImage(width, height);
-        SnapshotParameters parameters = new SnapshotParameters();
-        parameters.setViewport(new javafx.geometry.Rectangle2D(startPoint.getX() * scaleX, endPoint.getY() * scaleY, width, height));
+        BufferedImage snippedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-        imageView.snapshot(parameters, snippedImage);
-        return expandImage(SwingFXUtils.fromFXImage(snippedImage, null));
+
+        for (int y = 0; y < height;y++) {
+            for (int x = 0; x < width;x++) {
+                int rgb = originImg.getRGB((int) (x + startPoint.getX() * scaleX), (int) (y + startPoint.getY() * scaleY));
+                snippedImage.setRGB(x, y, rgb);
+            }
+        }
+        return expandImage(snippedImage);
     }
 
     public static void doOCR(BufferedImage itemImage, BufferedImage priceImage) throws IOException {
