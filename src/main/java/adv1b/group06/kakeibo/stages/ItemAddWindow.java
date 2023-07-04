@@ -14,10 +14,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * 品目追加のWindowのためのStage
+ * @author 須藤
+ */
 public class ItemAddWindow extends Stage {
 
     private static ItemAddWindow stage;
 
+    /**
+     * @param stage primaryStage
+     * @throws IOException fxmlがない場合
+     */
     public ItemAddWindow(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/ItemAddView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
