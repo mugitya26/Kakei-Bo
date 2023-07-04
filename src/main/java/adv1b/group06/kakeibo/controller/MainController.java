@@ -4,26 +4,22 @@ import adv1b.group06.kakeibo.DataManager;
 import adv1b.group06.kakeibo.MainWindow;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
-import adv1b.group06.kakeibo.model.ItemEntity;
-import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
 import adv1b.group06.kakeibo.stages.ExportWindow;
+import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
 import adv1b.group06.kakeibo.stages.ItemAddWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.io.IOException;
 import java.util.*;
 
 /**
  * メイン画面のWindow用Controller
+ *
  * @author 須藤
  */
 public class MainController {
@@ -42,7 +38,7 @@ public class MainController {
      */
     public void initMenuButton() {
         ObservableList<Menu> mList = menuBar.getMenus();
-        for(Menu menu: mList) {
+        for (Menu menu : mList) {
             final MenuItem menuItem = new MenuItem();
             menu.getItems().add(menuItem);
             menu.addEventHandler(Menu.ON_SHOWN, event -> menu.hide());
@@ -62,6 +58,7 @@ public class MainController {
 
     /**
      * 表示用データセット
+     *
      * @param items 表示用データ
      */
     public void setData(List<Item> items) {
@@ -70,19 +67,19 @@ public class MainController {
 
         int payout = 0;
         int income = 0;
-        for (Item item: items) {
+        for (Item item : items) {
             if (item.getCategory().isPayout) {
                 payout += item.getPrice();
             } else {
                 income += item.getPrice();
             }
         }
-        summary.setText(String.format("収入￥%d - 支出￥%d = 収支￥%d", income, payout, income-payout));
+        summary.setText(String.format("収入￥%d - 支出￥%d = 収支￥%d", income, payout, income - payout));
     }
 
     private void setViewRecord(List<Item> items) {
         List<Item> payoutItems = new ArrayList<>();
-        for (Item item: items) {
+        for (Item item : items) {
             if (item.getCategory().isPayout) {
                 payoutItems.add(item);
             }
@@ -111,6 +108,7 @@ public class MainController {
 
     /**
      * 収入記録画面表示
+     *
      * @throws Exception fxmlファイルがない場合
      */
     @FXML
@@ -121,6 +119,7 @@ public class MainController {
 
     /**
      * 品目追加画面表示
+     *
      * @throws IOException fxmlファイルがない場合
      */
     @FXML
@@ -161,7 +160,7 @@ public class MainController {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, deltaMonth);
         List<Item> monthlyData = new ArrayList<>();
-        for (int d=1;d<=calendar.get(Calendar.DAY_OF_MONTH);d++) {
+        for (int d = 1; d <= calendar.get(Calendar.DAY_OF_MONTH); d++) {
             monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), d));
         }
         setData(monthlyData);

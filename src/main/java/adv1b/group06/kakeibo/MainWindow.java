@@ -3,13 +3,9 @@ package adv1b.group06.kakeibo;
 
 import adv1b.group06.kakeibo.controller.MainController;
 import adv1b.group06.kakeibo.model.Item;
-import adv1b.group06.kakeibo.model.StatisticsInfo;
-import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,7 +27,7 @@ public class MainWindow extends Application {
         controller.initTableView();
         Calendar calendar = Calendar.getInstance();
         List<Item> monthlyData = new ArrayList<>();
-        for (int d=1;d<=calendar.get(Calendar.DAY_OF_MONTH);d++) {
+        for (int d = 1; d <= calendar.get(Calendar.DAY_OF_MONTH); d++) {
             monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), d));
         }
         controller.setData(monthlyData);
