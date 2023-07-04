@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import javafx.beans.binding.Bindings;
 
 import java.util.*;
 import java.net.URL;
