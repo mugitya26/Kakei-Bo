@@ -4,9 +4,11 @@ import adv1b.group06.kakeibo.DataManager;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.DataManager.*;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -41,14 +43,18 @@ public class IncomeController {
     @FXML
     private TextField incomeValue;
 
+    @FXML
+    public void onCancelButtonPressed() throws Exception {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
     /**
      * 完了ボタンに紐づけられているイベントハンドラー
      *
-     * @param event
+     * @param actionEvent
      */
-    @FXML
-    private void onFinishButtonPressed(ActionEvent event) {
-        //textfieldとdatepickerから値を獲得
+    public void onFinishButtonPressed(javafx.event.ActionEvent actionEvent) { //textfieldとdatepickerから値を獲得
         int price = Integer.parseInt(incomeValue.getText());
         LocalDate selectedDate = datePicker.getValue();
 
@@ -69,12 +75,5 @@ public class IncomeController {
         List<Item> list = DataManager.getItemDataList(pickedYear, pickedMonth, pickedDate);
         list.add(Income);
         DataManager.setSingleDayData(pickedYear, pickedMonth, pickedDate, list);
-    }
-
-
-    @FXML
-    public void onCancelButtonPressed() {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
     }
 }

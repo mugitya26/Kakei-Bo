@@ -1,5 +1,6 @@
 package adv1b.group06.kakeibo.stages;
 
+import adv1b.group06.kakeibo.controller.IncomeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class IncomeRecordWindow extends Stage {
         Scene scene = new Scene(fxmlLoader.load());
         setTitle("収入記録");
         setScene(scene);
+        IncomeController incomeController = fxmlLoader.getController();
         initOwner(stage);
         stage=this;
     }
