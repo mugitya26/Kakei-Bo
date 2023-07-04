@@ -92,7 +92,7 @@ public class WordCategorize {
         return null;
     }
 
-    public static class CategorizeAPIResponse {
+    private static class CategorizeAPIResponse {
         private Choice[] choices;
 
         public Choice[] getChoices() {
