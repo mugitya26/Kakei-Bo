@@ -48,7 +48,7 @@ public class ItemAddController {
 
     public void initTableView() {
         tableView.setPlaceholder(new Label("[+]ボタンを押して行を追加してください"));
-        for(Category c: Category.getDefaultCategory()) {
+        for(Category c: Category.getCategoriesList()) {
             categories.add(c.toString());
         }
 

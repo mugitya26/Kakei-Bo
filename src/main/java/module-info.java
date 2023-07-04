@@ -1,9 +1,11 @@
 module adv1b.group06.kakeibo {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.google.gson;
     requires java.desktop;
     requires tess4j;
     requires javafx.swing;
+    requires org.apache.poi.ooxml;
 
 
     opens adv1b.group06.kakeibo to javafx.fxml;

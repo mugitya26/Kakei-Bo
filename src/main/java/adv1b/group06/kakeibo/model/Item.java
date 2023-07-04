@@ -48,7 +48,6 @@ public class Item {
             throw new IllegalArgumentException("priceは0以上でなければなりません");
         this.price = price;
     }
-
     public StringProperty nameProperty() {
         return new SimpleStringProperty(name);
     }
@@ -60,5 +59,4 @@ public class Item {
     public ObservableValue<Integer> getPriceObservable() {
         return new SimpleIntegerProperty(this.price).asObject();
     }
-
 }
