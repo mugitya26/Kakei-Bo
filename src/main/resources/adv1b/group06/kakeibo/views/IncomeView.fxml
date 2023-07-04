@@ -40,19 +40,19 @@
             </HBox>
             <Pane prefHeight="224.0" prefWidth="570.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutY="-1.0" prefHeight="63.0" prefWidth="176.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="収入">
                            <font>
                               <Font name="System Bold Italic" size="20.0" />
                            </font>
                         </Text>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="0.0" prefWidth="176.0">
                            <children>
-                              <TextField maxHeight="20.0" maxWidth="200.0" minHeight="30.0" minWidth="150.0" prefHeight="20.0" prefWidth="200.0">
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
+                              <TextField fx:id="incomeValue" alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="149.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
                               </TextField>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="円">
                                  <font>
@@ -77,7 +77,7 @@
                               <Font name="System Bold Italic" size="20.0" />
                            </font>
                         </Text>
-                        <DatePicker />
+                        <DatePicker fx:id="datePicker" />
                      </children>
                   </VBox>
                </children>
@@ -100,8 +100,8 @@
                 <RowConstraints minHeight="-Infinity" prefHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="60.0" mnemonicParsing="false" text="キャンセル" textAlignment="CENTER" GridPane.columnIndex="1" />
-                  <Button maxHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" text="完了" textAlignment="CENTER" />
+                <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" minWidth="60.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" text="キャンセル" textAlignment="CENTER" GridPane.columnIndex="1" />
+                  <Button fx:id="finishButton" maxHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" onAction="#onFinishButtonPressed" text="完了" textAlignment="CENTER" />
                </children>
             </GridPane>
         </items>
