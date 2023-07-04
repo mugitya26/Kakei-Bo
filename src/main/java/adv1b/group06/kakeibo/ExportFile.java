@@ -17,11 +17,6 @@ import static javafx.application.Application.launch;
  * @author 西野
  */
 public class ExportFile {
-    public static void main(String[] args) {
-        String directoryPath = "src/main/resources/test";
-        generateCSV(2010, 2, directoryPath);
-    }
-
     /**
      * 年と月と出力先のパスを指定して家計簿のデータCSVに出力する
      *
