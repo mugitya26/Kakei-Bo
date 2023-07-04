@@ -14,6 +14,7 @@ import java.io.IOException;
 /**
  * OCRするための画像を切り取るためのWindow
  * @author 須藤
+ * @deprecated OCRToolに変更
  */
 public class OCRWindow extends Stage {
     private static OCRWindow stage;

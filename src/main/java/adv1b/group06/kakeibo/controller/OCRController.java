@@ -27,6 +27,7 @@ import java.net.URISyntaxException;
 /**
  * OCRWindowの動きを制御するコントローラクラス
  * @author 須藤
+ * @deprecated OCRToolに変更
  */
 public class OCRController {
 
