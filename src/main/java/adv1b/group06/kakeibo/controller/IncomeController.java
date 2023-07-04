@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 /**
  * IncomeWindowを扱うControllerクラス
+ * @author Saito
  */
 public class IncomeController {
 
