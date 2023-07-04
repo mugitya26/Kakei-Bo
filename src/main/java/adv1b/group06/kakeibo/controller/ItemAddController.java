@@ -2,20 +2,26 @@ package adv1b.group06.kakeibo.controller;
 
 import adv1b.group06.kakeibo.DataManager;
 import adv1b.group06.kakeibo.MainWindow;
+import adv1b.group06.kakeibo.OCRTool;
+import adv1b.group06.kakeibo.WordCategorize;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.DateItem;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.stages.ItemAddWindow;
+import adv1b.group06.kakeibo.stages.OCRWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Pair;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -24,9 +30,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemAddController {
 
@@ -62,30 +70,23 @@ public class ItemAddController {
         priceColumn.setCellFactory(param -> new PriceTableCell());
     }
 
-    public void onReadReceiptButtonPressed() throws TesseractException {
+    public void onReadReceiptButtonPressed() throws TesseractException, IOException {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("レシート読み込み");
-        List<File> files = fileChooser.showOpenMultipleDialog(ItemAddWindow.getStage());
-        if (files == null || files.size() == 0) {
-            return;
-        }
-
-
-        ITesseract tesseract = new Tesseract();
-        tesseract.setLanguage("jpn");
-        tesseract.setDatapath("Path"); // need Change
-        List<String> data = new ArrayList<>();
-
-
-        for (File file: files) {
-            try {
-                BufferedImage img = ImageIO.read(file);
-            } catch (IOException e) {
-                continue;
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(ItemAddWindow.getStage());
+        Image image = new Image(selectedFile.toURI().toString());
+        BufferedImage img = SwingFXUtils.fromFXImage(image, null);
+        OCRTool ocrTool = new OCRTool();
+        List<Pair<String, Integer>> items = ocrTool.getDataFromBufferedImage(img);
+        for (Pair<String, Integer> item: items) {
+            Category category = WordCategorize.fetchCategory(item.getKey());
+            if (category == null) {
+                tableView.getItems().add(new DateItem("", item.getKey(), Category.getUnassignedCategory(), item.getValue()));
+            } else {
+                tableView.getItems().add(new DateItem("", item.getKey(), category, item.getValue()));
             }
-            data.add(tesseract.doOCR(file));
         }
-
     }
 
     public void onExpandTableButtonPressed() {
@@ -166,4 +167,6 @@ public class ItemAddController {
             }
         }
     }
+
+
 }

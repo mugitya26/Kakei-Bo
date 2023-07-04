@@ -23,6 +23,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * メイン画面のWindow用Controller
+ * @author 須藤
+ */
 public class MainController {
     public TableView<Item> table;
     public TableColumn<Item, String> nameColumn;
@@ -30,8 +34,11 @@ public class MainController {
     public TableColumn<Item, Integer> priceColumn;
     public PieChart pieChart;
     public MenuBar menuBar;
+
+    /**
+     * ダミーのMenuItemを追加することでMenuをクリックしたときに動作するようにする
+     */
     public void initMenuButton() {
-        // ダミーのMenuItemを追加することでMenuをクリックしたときに動作するように．
         ObservableList<Menu> mList = menuBar.getMenus();
         for(Menu menu: mList) {
             final MenuItem menuItem = new MenuItem();
@@ -40,7 +47,10 @@ public class MainController {
             menu.addEventHandler(Menu.ON_SHOWING, event -> menu.fire());
         }
     }
-  
+
+    /**
+     * 表示用データテーブル初期化
+     */
     public void initTableView() {
         nameColumn.setCellValueFactory(param -> param.getValue().nameProperty());
         categoryColumn.setCellValueFactory(param -> param.getValue().categoryProperty());
@@ -48,6 +58,10 @@ public class MainController {
         table.setPlaceholder(new Label("データがありません"));
     }
 
+    /**
+     * 表示用データセット
+     * @param items 表示用データ
+     */
     public void setData(List<Item> items) {
         setViewRecord(items);
         setPieChart(items);
@@ -73,12 +87,20 @@ public class MainController {
         pieChart.setData(pieChartData);
     }
 
+    /**
+     * 収入記録画面表示
+     * @throws Exception fxmlファイルがない場合
+     */
     @FXML
     public void onShowIncomeRecordWindowButtonPressed() throws Exception {
         Stage s = new IncomeRecordWindow(MainWindow.getPrimaryStage());
         s.show();
     }
 
+    /**
+     * 品目追加画面表示
+     * @throws IOException fxmlファイルがない場合
+     */
     @FXML
     public void onShowItemAddWindowButtonPressed() throws IOException {
         Stage s = new ItemAddWindow(MainWindow.getPrimaryStage());
