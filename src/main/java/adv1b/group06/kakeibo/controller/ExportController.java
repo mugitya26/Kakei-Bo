@@ -26,6 +26,8 @@ public class ExportController implements Initializable {
 
     public CheckBox csv;
     @FXML
+    public CheckBox xlsx;
+    @FXML
     public ChoiceBox<String> years;
     @FXML
     public ChoiceBox<String> month;
@@ -35,8 +37,6 @@ public class ExportController implements Initializable {
     public Button export;
     @FXML
     public Button cancel;
-    @FXML
-    public CheckBox xlsx;
     @FXML
     public TextField fileName;
     @FXML
@@ -87,33 +87,36 @@ public class ExportController implements Initializable {
 
         // 年と月のリストを作成し、
         ArrayList<String> yearList = new ArrayList<>();
-        ArrayList<String> monthList = new ArrayList<>();
+        TreeMap<String, ArrayList<String>> yearMonthMap = new TreeMap<>();
+
         for (String[] yearMonth : yearMonthList) {
             if (!yearList.contains(yearMonth[0])) {
                 yearList.add(yearMonth[0]);
             }
-            if (!monthList.contains(yearMonth[1])) {
-                monthList.add(yearMonth[1]);
+
+            // 年ごとに月を追加する
+            yearMonthMap.putIfAbsent(yearMonth[0], new ArrayList<>());
+            if (!yearMonthMap.get(yearMonth[0]).contains(yearMonth[1])) {
+                yearMonthMap.get(yearMonth[0]).add(yearMonth[1]);
             }
         }
         // ChoiceBoxに値を設定
-        years.getItems().addAll(yearList);
-        years.getSelectionModel().select(yearList.size() - 1);
-        month.getItems().addAll(monthList);
-        month.getSelectionModel().select(monthList.size() - 1);
+        if (!yearList.isEmpty()) {
+            years.getItems().addAll(yearList);
+            years.getSelectionModel().select(yearList.size() - 1);
+
+            // 最初に選択されている年に対応する月をセット
+            if (yearMonthMap.containsKey(years.getValue())) {
+                month.getItems().addAll(yearMonthMap.get(years.getValue()));
+                month.getSelectionModel().selectFirst();
+            }
+        }
 
         years.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             month.getItems().clear(); // Month ChoiceBoxの項目を全てクリア
 
-            if (newVal != null) {
-                ArrayList<String[]> updateYearMonthList = getYearMonthFromFiles();
-                for (String[] yearMonth : updateYearMonthList) {
-                    if (yearMonth[0].equals(newVal)) {
-                        if (!month.getItems().contains(yearMonth[1])) {
-                            month.getItems().add(yearMonth[1]); // 選択された年に存在する月のみを追加
-                        }
-                    }
-                }
+            if (newVal != null && yearMonthMap.containsKey(newVal)) {
+                month.getItems().addAll(yearMonthMap.get(newVal)); // 選択された年に存在する月のみを追加
                 month.getSelectionModel().selectFirst(); // 最初の月を選択
             }
         });
@@ -146,45 +149,62 @@ public class ExportController implements Initializable {
      */
     @FXML
     private void export() {
-        int year = Integer.parseInt(years.getValue());
-        int month = Integer.parseInt(this.month.getValue());
+        String yearString = years.getValue();
+        String monthString = month.getValue();
+        int year = 0;
+        int month = 0;
+        if (yearString != null) {
+            year = Integer.parseInt(yearString);
+        }
+        if (monthString != null) {
+            month = Integer.parseInt(monthString);
+        }
         boolean XLSX = xlsx.isSelected();
         boolean CSV = csv.isSelected();
         int csv = 0;
         int xlsx = 0;
-        String exportFileName;
-        if (!fileName.getText().isEmpty()) {
-            selectedFolderPath += fileName.getText();
-        }
-        if (selectedFolderPath == null) {
-            folder.setText("出力先を選択してください");
+        ArrayList<String[]> yearMonthList = getYearMonthFromFiles();
+        if (year == 0 || month == 0) {
+            folder.setText("家計簿のデータが存在しません");
             folder.setStyle("-fx-text-fill: red;");
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), evt -> {
+                folder.setText("");
+            }));
+            timeline.play();
         } else {
-            if (!XLSX && !CSV) {
-                choiceFile.setText("ファイルの出力形式が選択されていません");
-                choiceFile.setStyle("-fx-text-fill: red;");
+            if (!fileName.getText().isEmpty()) {
+                selectedFolderPath += fileName.getText();
+            }
+            if (selectedFolderPath == null) {
+                folder.setText("出力先を選択してください");
+                folder.setStyle("-fx-text-fill: red;");
             } else {
-                if (!fileName.getText().isEmpty()) {
-                    newFileName = fileName.getText();
+                if (!XLSX && !CSV) {
+                    choiceFile.setText("ファイルの出力形式が選択されていません");
+                    choiceFile.setStyle("-fx-text-fill: red;");
+                } else {
+                    if (!fileName.getText().isEmpty()) {
+                        newFileName = fileName.getText();
+                    }
+                    newSelectedFolderPath = selectedFolderPath + newFileName;
+                    if (CSV) {
+                        csv = ExportFile.generateCSV(year, month, newSelectedFolderPath);
+                        folder.setText("出力に成功しました。" + newFileName);
+                        folder.setStyle("-fx-text-fill: black;");
+                    }
+                    if (XLSX) {
+                        xlsx = ExportFile.generateXlsx(year, month, newSelectedFolderPath);
+                        folder.setText("出力に成功しました。" + newFileName);
+                        folder.setStyle("-fx-text-fill: black;");
+                    }
+                    choiceFile.setText("出力したいファイルの形式を選択");
+                    choiceFile.setStyle("-fx-text-fill: black;");
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), evt -> {
+                        folder.setText(selectedFolderPath);
+                        folder.setStyle("-fx-text-fill: black;");
+                    }));
+                    timeline.play();
                 }
-                newSelectedFolderPath = selectedFolderPath + newFileName;
-                if (CSV) {
-                    csv = ExportFile.generateCSV(year, month, newSelectedFolderPath);
-                    folder.setText("出力に成功しました。" + newFileName);
-                    folder.setStyle("-fx-text-fill: black;");
-                }
-                if (XLSX) {
-                    xlsx = ExportFile.generateXlsx(year, month, newSelectedFolderPath);
-                    folder.setText("出力に成功しました。" + newFileName);
-                    folder.setStyle("-fx-text-fill: black;");
-                }
-                choiceFile.setText("出力したいファイルの形式を選択");
-                choiceFile.setStyle("-fx-text-fill: black;");
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), evt -> {
-                    folder.setText(selectedFolderPath);
-                    folder.setStyle("-fx-text-fill: black;");
-                }));
-                timeline.play();
             }
         }
     }
