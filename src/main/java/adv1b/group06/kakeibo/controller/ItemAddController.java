@@ -1,12 +1,15 @@
 package adv1b.group06.kakeibo.controller;
 
+import adv1b.group06.kakeibo.DataManager;
 import adv1b.group06.kakeibo.MainWindow;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.DateItem;
+import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.stages.ItemAddWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -106,10 +109,20 @@ public class ItemAddController {
     }
 
     public void onFinishButtonPressed() {
-        // register process
-
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
+        for (DateItem item: tableView.getItems()) {
+            String[] date = item.getDate().split("-");
+            try {
+                int year = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int day = Integer.parseInt(date[2]);
+                List<Item> saveItem = DataManager.getItemDataList(year, month, day);
+                saveItem.add(new Item(item.getName(), item.getCategory(), item.getPrice()));
+                DataManager.setSingleDayData(year, month, day, saveItem);
+            } catch (NumberFormatException ignored) {
+            }
+        }
     }
 
     public static class DatePickerTableCell extends TableCell<DateItem, String> {
