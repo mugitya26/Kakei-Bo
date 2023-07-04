@@ -13,9 +13,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * メインウィンドウ表示用
+ * @author 須藤
+ */
 public class MainWindow extends Application {
     private static Stage stage;
 
+
+    /**
+     * メインウィンドウの表示
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/MainView.fxml"));
