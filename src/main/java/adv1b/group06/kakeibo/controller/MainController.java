@@ -1,5 +1,6 @@
 package adv1b.group06.kakeibo.controller;
 
+import adv1b.group06.kakeibo.DataManager;
 import adv1b.group06.kakeibo.MainWindow;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
@@ -19,9 +20,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * メイン画面のWindow用Controller
@@ -34,6 +33,9 @@ public class MainController {
     public TableColumn<Item, Integer> priceColumn;
     public PieChart pieChart;
     public MenuBar menuBar;
+    public Label summary;
+
+    private int deltaMonth;
 
     /**
      * ダミーのMenuItemを追加することでMenuをクリックしたときに動作するようにする
@@ -65,16 +67,36 @@ public class MainController {
     public void setData(List<Item> items) {
         setViewRecord(items);
         setPieChart(items);
+
+        int payout = 0;
+        int income = 0;
+        for (Item item: items) {
+            if (item.getCategory().isPayout) {
+                payout += item.getPrice();
+            } else {
+                income += item.getPrice();
+            }
+        }
+        summary.setText(String.format("収入￥%d - 支出￥%d = 収支￥%d", income, payout, income-payout));
     }
 
     private void setViewRecord(List<Item> items) {
-        ObservableList<Item> itemList = FXCollections.observableArrayList(items);
+        List<Item> payoutItems = new ArrayList<>();
+        for (Item item: items) {
+            if (item.getCategory().isPayout) {
+                payoutItems.add(item);
+            }
+        }
+        ObservableList<Item> itemList = FXCollections.observableArrayList(payoutItems);
         table.setItems(itemList);
     }
 
     private void setPieChart(List<Item> items) {
         Map<Category, Integer> priceSum = new HashMap<>();
         for (Item i : items) {
+            if (!i.getCategory().isPayout) {
+                continue;
+            }
             Category category = i.getCategory();
             int price = i.getPrice();
             int currentSum = priceSum.getOrDefault(category, 0);
@@ -125,12 +147,24 @@ public class MainController {
 
     @FXML
     public void onPrevMonthButtonPressed() {
-
+        deltaMonth -= 1;
+        updateData();
     }
 
     @FXML
     public void onNextMonthButtonPressed() {
+        deltaMonth += 1;
+        updateData();
+    }
 
+    private void updateData() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, deltaMonth);
+        List<Item> monthlyData = new ArrayList<>();
+        for (int d=1;d<=calendar.get(Calendar.DAY_OF_MONTH);d++) {
+            monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), d));
+        }
+        setData(monthlyData);
     }
 }
 
