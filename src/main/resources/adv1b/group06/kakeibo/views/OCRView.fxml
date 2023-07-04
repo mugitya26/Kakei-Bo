@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.OCRController">
+   <children>
+      <Label alignment="CENTER" text="商品名が含まれる部分をマウスで囲ってください" fx:id="label">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Pane prefHeight="800.0">
+         <children>
+            <ImageView fitHeight="358.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" mouseTransparent="true" fx:id="imageView" />
+            <Canvas height="358.0" width="600.0" fx:id="canvas" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" />
+         </children>
+      </Pane>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+         <children>
+            <Button mnemonicParsing="false" text="戻る" onAction="#onBackButtonPressed"/>
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="次へ" onAction="#onNextButtonPressed" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

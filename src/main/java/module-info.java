@@ -4,6 +4,7 @@ module adv1b.group06.kakeibo {
     requires com.google.gson;
     requires java.desktop;
     requires tess4j;
+    requires javafx.swing;
     requires org.apache.poi.ooxml;
 
 
