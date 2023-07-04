@@ -1,5 +1,6 @@
 package adv1b.group06.kakeibo;
 
+import adv1b.group06.kakeibo.model.Setting;
 import com.google.gson.stream.JsonReader;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -14,12 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
@@ -31,6 +30,8 @@ import java.util.List;
  * @author 町田
  */
 public class SettingManager {
+    private static final String path = "src/main/resources/adv1b/group06/kakeibo/setting.json";
+    private static final String dirPath = "src/main/resources/adv1b/group06/kakeibo";
     private static Stage stage;
     private static Gson gson = new Gson();
     private static JsonObject obj = new JsonObject();
@@ -46,9 +47,6 @@ public class SettingManager {
         stage.setScene(scene);
         SettingManager.stage = stage;
         stage.show();
-    }
-
-    public void main(String[] arg) {
     }
 
     /** 言語の設定変更メソッド */
@@ -69,24 +67,10 @@ public class SettingManager {
      */
     @FXML
     public void changeLanToEnglish() {
-        Setting setting;
-        String fontSize;
-        String lan;
-        String color;
-        try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader("setting.json")))) {
-            fontSize = obj.get("fontSize").toString();
-            lan = "English";
-            color = obj.get("color").toString();
-            setting = new Setting(fontSize, lan, color);
-            try (JsonWriter writer = new JsonWriter(new BufferedWriter(new FileWriter("setting.json")))) {
-
-                gson.toJson(setting);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String language="English";
+        Setting setting=readJson();
+        setting.language=language;
+        writeJson(setting);
     }
 
     /**
@@ -94,23 +78,10 @@ public class SettingManager {
      */
     @FXML
     public void changeLanToJapanese() {
-        Setting setting;
-        String fontSize;
-        String lan;
-        String color;
-        try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader("setting.json")))) {
-            fontSize = obj.get("fontSize").toString();
-            lan = "日本語";
-            color = obj.get("color").toString();
-            setting = new Setting(fontSize, lan, color);
-            try (JsonWriter writer = new JsonWriter(new BufferedWriter(new FileWriter("setting.json")))) {
-                gson.toJson(setting);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String language="日本語";
+        Setting setting=readJson();
+        setting.language=language;
+        writeJson(setting);
     }
 
     /**
@@ -123,9 +94,7 @@ public class SettingManager {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("色彩設定");
         stage.setScene(scene);
-
         SettingManager.stage = stage;
-
         stage.show();
     }
 
@@ -134,25 +103,11 @@ public class SettingManager {
      */
     @FXML
     public void settingColor(ActionEvent event){
-
         Color mycolor =colorPicker.getValue();
         pane.setBackground((new Background(new BackgroundFill(mycolor,null,null))));
-        Setting setting;
-        String fontSize;
-        String lan;
-        String color=mycolor.toString();
-        try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader("setting.json")))) {
-            fontSize = obj.get("fontSize").toString();
-            lan = obj.get("language").toString();
-            setting = new Setting(fontSize, lan, color);
-            try (JsonWriter writer = new JsonWriter(new BufferedWriter(new FileWriter("setting.json")))) {
-                gson.toJson(setting);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Setting setting=readJson();
+        setting.color=mycolor.toString();
+        writeJson(setting);
     }
 
     /**
@@ -164,9 +119,7 @@ public class SettingManager {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("文字サイズ設定");
         stage.setScene(scene);
-
         SettingManager.stage = stage;
-
         stage.show();
     }
 
@@ -175,7 +128,7 @@ public class SettingManager {
      */
     @FXML
     public double enlargeLetter() {
-        try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader("setting.json")))) {
+        try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader(path)))) {
             String fontSize = obj.get("fontSize").toString();
             return (Double.parseDouble((fontSize)) + 1);
         }catch(IOException e){
@@ -193,28 +146,58 @@ public class SettingManager {
         return (Double.parseDouble((fontSize)) - 1);
     }
 
-    /**
-     * @author 町田
-     * 設定要素のクラス
-     */
-    public class Setting {
-        private String fontSize;
-        private String language;
-        private String color;
 
-        /**
-         * 設定の要素のコンストラクタ
-         * @param fontSize フォントのサイズ
-         * @param language　言語
-         * @param color　　　色
-         * @author 町田
-         */
-        public Setting(String fontSize, String language, String color) {
-            this.fontSize = fontSize;
-            this.language = language;
-            this.color = color;
+    /**
+     * jsonファイルを読んで要素を返すメソッド
+     * @return setting
+     */
+    private Setting readJson(){
+        String fontSize="36.0";
+        String language="日本語";
+        String color="white";
+        Setting setting=new Setting(fontSize, language, color);
+        Path filePath = Paths.get(path);
+        File file = filePath.toFile();
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                Gson gson = new Gson();
+                String json=gson.toJson(setting);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
         }
+        try (JsonReader reader = new JsonReader(new BufferedReader(new FileReader(path)))) {
+            fontSize = obj.get("fontSize").toString();
+            language = obj.get("language").toString();;
+            color = obj.get("color").toString();
+            setting = new Setting(fontSize, language, color);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return setting;
     }
 
-
+    /**
+     * jsonファイル書き込み
+     * @param setting
+     */
+    private void writeJson(Setting setting){
+        Path filePath = Paths.get(path);
+        File file = filePath.toFile();
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                Gson gson = new Gson();
+                String json=gson.toJson(setting);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        try (JsonWriter writer = new JsonWriter(new BufferedWriter(new FileWriter(path)))) {
+            gson.toJson(setting);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
