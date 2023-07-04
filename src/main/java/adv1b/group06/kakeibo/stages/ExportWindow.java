@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * 外部出力処理を行う際のウィンドウのstage
- * @author 西野奨真
+ * @author 西野
  */
 
 public class ExportWindow extends Stage {

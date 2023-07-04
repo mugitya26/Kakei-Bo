@@ -20,7 +20,7 @@ import java.io.*;
 /**
  * ExportWindowに関するコントローラークラス
  *
- * @author 西野奨真
+ * @author 西野
  */
 public class ExportController implements Initializable {
 

@@ -14,7 +14,7 @@ import static javafx.application.Application.launch;
 
 /**
  * M4-1 外部出力処理を行うクラス
- * @author 西野奨真
+ * @author 西野
  */
 public class ExportFile {
     public static void main(String[] args) {
