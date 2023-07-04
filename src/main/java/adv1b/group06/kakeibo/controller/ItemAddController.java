@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo.controller;
 
 import adv1b.group06.kakeibo.OCRTool;
+import adv1b.group06.kakeibo.WordCategorize;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.DateItem;
 import adv1b.group06.kakeibo.stages.ItemAddWindow;
@@ -75,7 +76,7 @@ public class ItemAddController {
         OCRTool ocrTool = new OCRTool();
         List<Pair<String, Integer>> items = ocrTool.getDataFromBufferedImage(img);
         for (Pair<String, Integer> item: items) {
-            Category category = WordCategorize.fetchCategory(item);
+            Category category = WordCategorize.fetchCategory(item.getKey());
             if (category == null) {
                 tableView.getItems().add(new DateItem("", item.getKey(), Category.getUnassignedCategory(), item.getValue()));
             } else {
