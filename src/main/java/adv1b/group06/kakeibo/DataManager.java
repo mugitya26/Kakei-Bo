@@ -2,10 +2,7 @@ package adv1b.group06.kakeibo;
 
 import adv1b.group06.kakeibo.model.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,9 +11,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * M6-3 家計簿データ管理を行うクラス
+ *
  * @author 荻野
  */
 public class DataManager {
@@ -24,6 +23,7 @@ public class DataManager {
 
     /**
      * 日付を指定してファイル名を取得する
+     *
      * @param year
      * @param month
      * @param date
@@ -35,6 +35,7 @@ public class DataManager {
 
     /**
      * 月を指定して統計を計算する
+     *
      * @param year
      * @param month
      * @return 計算結果
@@ -52,6 +53,7 @@ public class DataManager {
 
     /**
      * 日付を指定して、登録されているデータをリストで返す
+     *
      * @param year
      * @param month
      * @param date
@@ -86,6 +88,7 @@ public class DataManager {
 
     /**
      * 日付を指定してデータを保存する。指定日の既存データは上書きされる。
+     *
      * @param year
      * @param month
      * @param date
@@ -119,5 +122,59 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * json形式で保存
+     */
+    public static void importCategoryList() {
+        String fileName = "category-list.json";
+        String jsonStr = "";
+        Path filePath = Paths.get(directoryPath + "/" + fileName);
+        File file = filePath.toFile();
+        // データが存在しないときには空のリストを返す
+        if (!file.exists())
+            return;
+
+        try (BufferedReader br = Files.newBufferedReader(filePath)) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                jsonStr += line + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new Gson();
+        ArrayList<Category> array = gson.fromJson(jsonStr,new TypeToken<ArrayList<Category>>(){}.getType());
+        for (var category : array) {
+            new Category(category.toString(), category.isPayout);
+        }
+    }
+
+    /**
+     * カテゴリのリストをjson形式で保存する
+     */
+    public static void exportCategoryList() {
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(Category.getCategoriesList());
+        String fileName = "category-list.json";
+        Path dirPath = Paths.get(directoryPath);
+        dirPath.toFile().mkdir();
+
+        // 既存のデータは上書きされる
+        Path filePath = Paths.get(directoryPath + "/" + fileName);
+        File file = filePath.toFile();
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            fw.write(jsonStr);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
