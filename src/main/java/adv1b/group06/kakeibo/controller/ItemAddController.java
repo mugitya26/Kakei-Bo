@@ -28,6 +28,7 @@ import net.sourceforge.tess4j.TesseractException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -157,22 +158,19 @@ public class ItemAddController {
     public void onFinishButtonPressed() {
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
-        System.out.println(tableView.getItems().size());
         for (DateItem item : tableView.getItems()) {
             if (item.getName().equals("")) {
                 continue;
             }
-            String[] date = item.getDate().toString().split("-");
-            try {
-                int year = Integer.parseInt(date[0]);
-                int month = Integer.parseInt(date[1]);
-                int day = Integer.parseInt(date[2]);
-                System.out.printf("%s, %s, %s\n", item.getName(), item.getCategory(), item.getPrice());
-                List<Item> saveItem = DataManager.getItemDataList(year, month, day);
-                saveItem.add(new Item(item.getName(), item.getCategory(), item.getPrice()));
-                DataManager.setSingleDayData(year, month, day, saveItem);
-            } catch (NumberFormatException ignored) {
-            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(item.getDate());
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH) + 1; // 月は0始まりのため+1
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            List<Item> saveItem = DataManager.getItemDataList(year, month, day);
+            saveItem.add(new Item(item.getName(), item.getCategory(), item.getPrice()));
+            DataManager.setSingleDayData(year, month, day, saveItem);
+
         }
     }
 
