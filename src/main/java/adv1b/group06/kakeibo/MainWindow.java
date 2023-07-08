@@ -28,6 +28,9 @@ public class MainWindow extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        // カテゴリリストを読み込む
+        DataManager.importCategoryList();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/MainView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Kakei-Bo");
@@ -44,6 +47,10 @@ public class MainWindow extends Application {
         MainWindow.stage = stage;
 
         stage.show();
+    }
+
+    public void stop() {
+        DataManager.exportCategoryList();
     }
 
     public static Stage getPrimaryStage() {

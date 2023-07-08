@@ -7,12 +7,20 @@ import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.model.StatisticsInfo;
 
+import javax.xml.crypto.Data;
+
 /**
-* DataManagerクラスのテストを行う
-* @author 荻野
-*/
+ * DataManagerクラスのテストを行う
+ *
+ * @author 荻野
+ */
 class DataManagerTest {
     public static void main(String[] args) {
+        DataManager.importCategoryList();
+        System.out.println(Category.getCategoriesList().toString());
+        Category c = new Category("testCategory1", true);
+        DataManager.exportCategoryList();
+
         int year = 2010;
         int month = 1;
         // 書き込みテスト
