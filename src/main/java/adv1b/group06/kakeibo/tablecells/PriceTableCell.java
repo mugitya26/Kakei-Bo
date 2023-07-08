@@ -36,13 +36,11 @@ public class PriceTableCell extends TableCell<DateItem, Integer> {
             if (oldValue.equals("") || newValue.equals("")) {
                 setItem(0);
             } else {
-                System.out.println(newValue);
                 setItem(Integer.valueOf(newValue));
             }
         });
 
         textField.setOnAction(e -> {
-            System.out.println("Commiting " + textField.getText());
             setText(textField.getText());
             commitEdit(Integer.valueOf(textField.getText()));
         });

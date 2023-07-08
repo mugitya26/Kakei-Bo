@@ -26,7 +26,6 @@ public class DatePickerTableCell extends TableCell<DateItem, Date> {
             datePicker = new DatePicker(getDate());
             datePicker.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
             datePicker.setOnAction((e) -> {
-                System.out.println("Committed: " + datePicker.getValue().toString());
                 commitEdit(Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             });
             setText(null);
