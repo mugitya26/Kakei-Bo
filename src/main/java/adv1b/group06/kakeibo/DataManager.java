@@ -65,8 +65,9 @@ public class DataManager {
         Path filePath = Paths.get(directoryPath + "/" + fileName);
         File file = filePath.toFile();
         // データが存在しないときには空のリストを返す
-        if (!file.exists())
+        if (!file.exists()){
             return new ArrayList<Item>();
+        }
 
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
             String line;
@@ -133,8 +134,9 @@ public class DataManager {
         Path filePath = Paths.get(directoryPath + "/" + fileName);
         File file = filePath.toFile();
         // データが存在しないときには空のリストを返す
-        if (!file.exists())
+        if (!file.exists()){
             return;
+        }
 
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
             String line;
