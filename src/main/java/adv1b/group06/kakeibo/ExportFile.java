@@ -21,7 +21,6 @@ public class ExportFile {
      * @param year
      * @param month
      * @param filePath
-     * @return 出力に成功した場合は0を返す
      */
     public static void generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
@@ -55,7 +54,6 @@ public class ExportFile {
      * @param year
      * @param month
      * @param filePath
-     * @return 出力に成功した場合は0を返す
      */
     public static void generateXlsx(int year, int month, String filePath) {
         List<Item> kakeiboData;
