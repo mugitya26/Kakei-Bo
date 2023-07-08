@@ -34,6 +34,10 @@ public class MainWindow extends Application {
         stage.show();
     }
 
+    public void stop() {
+        DataManager.exportCategoryList();
+    }
+
     public static Stage getPrimaryStage() {
         return stage;
     }
