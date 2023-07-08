@@ -28,7 +28,6 @@ public class KakeiboEditingController {
     public Button itemDeleteButton;
     public Button itemAddButton;
     public Label sumLabel;
-
     public TableView<DateItem> tableView;
     public TableColumn<DateItem, String> nameColumn;
     public TableColumn<DateItem, String> categoryColumn;
@@ -39,6 +38,9 @@ public class KakeiboEditingController {
 
     private LocalDate oldDate;
 
+    /**
+     * ウィンドウ初期化
+     */
     public void initWindow() {
         initTableView();
         Calendar calendar = Calendar.getInstance();
@@ -90,10 +92,16 @@ public class KakeiboEditingController {
         });
     }
 
+    /**
+     * 品目追加ボタン押下時処理
+     */
     public void onItemAddButtonPressed() {
         tableView.getItems().add(new DateItem(new Date(), "", Category.getUnassignedCategory(), 0));
     }
 
+    /**
+     * 品目削除ボタン押下時処理
+     */
     public void onItemDeleteButtonPressed() {
         ObservableList<DateItem> ol = tableView.getItems();
         if (ol.size() == 0) {
@@ -108,11 +116,17 @@ public class KakeiboEditingController {
         }
     }
 
+    /**
+     * キャンセルボタン押下時処理
+     */
     public void onCancelButtonPressed() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * 終了ボタン押下時処理
+     */
     public void onFinishButtonPressed() {
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
