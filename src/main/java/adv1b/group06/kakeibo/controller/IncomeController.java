@@ -75,5 +75,8 @@ public class IncomeController {
         List<Item> list = DataManager.getItemDataList(pickedYear, pickedMonth, pickedDate);
         list.add(Income);
         DataManager.setSingleDayData(pickedYear, pickedMonth, pickedDate, list);
+
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 }
