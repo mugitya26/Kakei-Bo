@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.KakeiboEditingController">
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="375.0" prefWidth="260.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -37,23 +37,23 @@
             </HBox>
             <HBox prefHeight="33.0" prefWidth="600.0">
                <children>
-                  <DatePicker>
+                  <DatePicker fx:id="datePicker">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </DatePicker>
                   <AnchorPane prefHeight="33.0" prefWidth="407.0">
                      <children>
-                        <Button layoutX="327.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="削除" />
+                        <Button layoutX="327.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="削除" fx:id="itemDeleteButton" onAction="#onItemDeleteButtonPressed"/>
                      </children>
                   </AnchorPane>
                </children>
             </HBox>
-            <TableView prefHeight="194.0" prefWidth="500.0">
+            <TableView prefHeight="194.0" prefWidth="500.0" fx:id="tableView" editable="true">
               <columns>
-                <TableColumn prefWidth="293.0" text="商品名" />
-                  <TableColumn prefWidth="93.0" text="カテゴリー" />
-                  <TableColumn prefWidth="113.0" text="価格(円)" />
+                <TableColumn prefWidth="293.0" text="商品名" fx:id="nameColumn"/>
+                  <TableColumn prefWidth="93.0" text="カテゴリー" fx:id="categoryColumn"/>
+                  <TableColumn prefWidth="113.0" text="価格(円)" fx:id="priceColumn"/>
               </columns>
                <VBox.margin>
                   <Insets left="20.0" right="80.0" />
@@ -61,8 +61,8 @@
             </TableView>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="23.0" layoutY="10.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="66.0" text="追加" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="11.0" prefHeight="34.0" prefWidth="111.0" text="合計：○○" />
+                  <Button layoutX="23.0" layoutY="10.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="66.0" text="追加" fx:id="itemAddButton" onAction="#onItemAddButtonPressed"/>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="11.0" prefHeight="34.0" prefWidth="111.0" text="合計：○○" fx:id="sumLabel"/>
                </children>
             </AnchorPane>
          </children>
@@ -80,8 +80,8 @@
                 <RowConstraints minHeight="-Infinity" prefHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="60.0" mnemonicParsing="false" text="キャンセル" textAlignment="CENTER" GridPane.columnIndex="1" />
-                  <Button maxHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" text="完了" textAlignment="CENTER" />
+                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="60.0" mnemonicParsing="false" text="キャンセル" textAlignment="CENTER" GridPane.columnIndex="1" fx:id="cancelButton" onAction="#onCancelButtonPressed"/>
+                  <Button maxHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" text="完了" textAlignment="CENTER" fx:id="finishButton" onAction="#onFinishButtonPressed"/>
                </children>
             </GridPane>
         </items>

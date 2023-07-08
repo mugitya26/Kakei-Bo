@@ -7,6 +7,7 @@ import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.stages.ExportWindow;
 import adv1b.group06.kakeibo.stages.IncomeRecordWindow;
 import adv1b.group06.kakeibo.stages.ItemAddWindow;
+import adv1b.group06.kakeibo.stages.KakeiboEditingWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -129,8 +130,9 @@ public class MainController {
     }
 
     @FXML
-    public void onShowEditWindowButtonPressed() {
-
+    public void onShowEditWindowButtonPressed() throws Exception {
+        Stage s = new KakeiboEditingWindow(MainWindow.getPrimaryStage());
+        s.show();
     }
 
     @FXML

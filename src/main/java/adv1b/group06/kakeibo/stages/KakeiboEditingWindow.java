@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo.stages;
 
 import adv1b.group06.kakeibo.controller.IncomeController;
+import adv1b.group06.kakeibo.controller.KakeiboEditingController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,9 +24,9 @@ public class KakeiboEditingWindow extends Stage {
         Scene scene = new Scene(fxmlLoader.load());
         setTitle("家計簿編集");
         setScene(scene);
-        //ここにKakeiboEditingControllerのインスタンスを生成する．
-        //IncomeController incomeController = fxmlLoader.getController();
         initOwner(stage);
+        KakeiboEditingController controller = fxmlLoader.getController();
+        controller.initWindow();
         stage=this;
     }
 
