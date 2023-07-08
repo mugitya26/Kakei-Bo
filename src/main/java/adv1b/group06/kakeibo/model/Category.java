@@ -2,10 +2,7 @@ package adv1b.group06.kakeibo.model;
 
 import adv1b.group06.kakeibo.DataManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * カテゴリの管理などを行う
@@ -68,6 +65,14 @@ public class Category {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Category)) {
+            return false;
+        }
+        return obj.hashCode() == this.hashCode();
     }
 
     public static Category getUnassignedCategory() {

@@ -36,12 +36,11 @@ public class MainWindow extends Application {
         stage.setTitle("Kakei-Bo");
         stage.setScene(scene);
         MainController controller = fxmlLoader.getController();
-        controller.initMenuButton();
-        controller.initTableView();
+        controller.initWindow();
         Calendar calendar = Calendar.getInstance();
         List<Item> monthlyData = new ArrayList<>();
-        for (int d = 1; d <= calendar.get(Calendar.DAY_OF_MONTH); d++) {
-            monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), d));
+        for (int d = 1; d <= 31; d++) {
+            monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, d));
         }
         controller.setData(monthlyData);
         MainWindow.stage = stage;

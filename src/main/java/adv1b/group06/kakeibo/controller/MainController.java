@@ -24,19 +24,26 @@ import java.util.*;
  */
 public class MainController {
     public TableView<Item> table;
-    public TableColumn<Item, String> nameColumn;
     public TableColumn<Item, String> categoryColumn;
     public TableColumn<Item, Integer> priceColumn;
     public PieChart pieChart;
     public MenuBar menuBar;
     public Label summary;
+    public Label dateLabel;
 
     private int deltaMonth;
+
+    public void initWindow() {
+        initMenuButton();
+        initTableView();
+        Calendar calendar = Calendar.getInstance();
+        dateLabel.setText(String.format("%d年 %d月", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1));
+    }
 
     /**
      * ダミーのMenuItemを追加することでMenuをクリックしたときに動作するようにする
      */
-    public void initMenuButton() {
+    private void initMenuButton() {
         ObservableList<Menu> mList = menuBar.getMenus();
         for (Menu menu : mList) {
             final MenuItem menuItem = new MenuItem();
@@ -49,8 +56,7 @@ public class MainController {
     /**
      * 表示用データテーブル初期化
      */
-    public void initTableView() {
-        nameColumn.setCellValueFactory(param -> param.getValue().nameProperty());
+    private void initTableView() {
         categoryColumn.setCellValueFactory(param -> param.getValue().categoryProperty());
         priceColumn.setCellValueFactory(param -> param.getValue().getPriceObservable());
         table.setPlaceholder(new Label("データがありません"));
@@ -78,11 +84,22 @@ public class MainController {
     }
 
     private void setViewRecord(List<Item> items) {
-        List<Item> payoutItems = new ArrayList<>();
+        Map<Category, Integer> categoryItems = new HashMap<>();
+        // カテゴリごとに金額を合計する
         for (Item item : items) {
-            if (item.getCategory().isPayout) {
-                payoutItems.add(item);
+            if (!item.getCategory().isPayout) {
+                continue;
             }
+            if (categoryItems.containsKey(item.getCategory())) {
+                Integer price = categoryItems.get(item.getCategory());
+                categoryItems.put(item.getCategory(), price + item.getPrice());
+            } else {
+                categoryItems.put(item.getCategory(), item.getPrice());
+            }
+        }
+        List<Item> payoutItems = new ArrayList<>();
+        for (Map.Entry<Category, Integer> entry : categoryItems.entrySet()) {
+            payoutItems.add(new Item("", entry.getKey(), entry.getValue()));
         }
         ObservableList<Item> itemList = FXCollections.observableArrayList(payoutItems);
         table.setItems(itemList);
@@ -161,9 +178,10 @@ public class MainController {
         calendar.add(Calendar.MONTH, deltaMonth);
         List<Item> monthlyData = new ArrayList<>();
         for (int d = 1; d <= calendar.get(Calendar.DAY_OF_MONTH); d++) {
-            monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), d));
+            monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, d));
         }
         setData(monthlyData);
+        dateLabel.setText(String.format("%d年 %d月", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1));
     }
 }
 
