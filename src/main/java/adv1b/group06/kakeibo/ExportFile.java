@@ -7,21 +7,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static javafx.application.Application.launch;
 
 /**
  * M4-1 外部出力処理を行うクラス
+ *
  * @author 西野
  */
 public class ExportFile {
-    public static void main(String[] args) {
-        String directoryPath = "src/main/resources/test";
-        generateCSV(2010, 2, directoryPath);
-    }
-
     /**
      * 年と月と出力先のパスを指定して家計簿のデータCSVに出力する
      *
@@ -30,9 +23,8 @@ public class ExportFile {
      * @param filePath
      * @return 出力に成功した場合は0を返す
      */
-    public static int generateCSV(int year, int month, String filePath) {
+    public static void generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
-        //List<DateItem> date = new ArrayList<>();
         try (FileWriter writer = new FileWriter(filePath + ".csv")) {
             writer.append("日付,カテゴリ,商品名,支出");
             writer.append("\n");
@@ -55,7 +47,6 @@ public class ExportFile {
         } catch (IOException e) {
             System.out.println("CSVファイルの書き込み中にエラーが発生しました: " + e.getMessage());
         }
-        return 0;
     }
 
     /**
@@ -66,9 +57,8 @@ public class ExportFile {
      * @param filePath
      * @return 出力に成功した場合は0を返す
      */
-    public static int generateXlsx(int year, int month, String filePath) {
+    public static void generateXlsx(int year, int month, String filePath) {
         List<Item> kakeiboData;
-        //List<DateItem> date = new ArrayList<>();
         try (Workbook workbook = new XSSFWorkbook(); FileOutputStream fos = new FileOutputStream(filePath + ".xlsx")) {
             Sheet sheet = workbook.createSheet(String.format("%04d-%02d", year, month));
 
@@ -90,7 +80,6 @@ public class ExportFile {
                         row.createCell(1).setCellValue(item.getCategory().toString());
                         row.createCell(2).setCellValue(item.getName());
 
-
                         // CellStyleを作成して数値をセルに設定します。
                         CellStyle style = workbook.createCellStyle();
                         style.setDataFormat(workbook.createDataFormat().getFormat("#,##0"));
@@ -105,6 +94,5 @@ public class ExportFile {
         } catch (IOException e) {
             System.out.println("Excelファイルの書き込み中にエラーが発生しました: " + e.getMessage());
         }
-        return 0;
     }
 }
