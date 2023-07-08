@@ -1,5 +1,6 @@
 package adv1b.group06.kakeibo.tablecells;
 
+
 import adv1b.group06.kakeibo.model.DateItem;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -10,6 +11,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
+/**
+ * 編集可能な日付選択セルを実装するクラス
+ *
+ * @author 須藤
+ */
 public class DatePickerTableCell extends TableCell<DateItem, Date> {
     private DatePicker datePicker;
 

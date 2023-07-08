@@ -5,6 +5,11 @@ import adv1b.group06.kakeibo.model.DateItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 
+/**
+ * 編集可能な数値のみ入力可能なセルを実装するクラス
+ *
+ * @author 須藤
+ */
 public class PriceTableCell extends TableCell<DateItem, Integer> {
     TextField textField;
 

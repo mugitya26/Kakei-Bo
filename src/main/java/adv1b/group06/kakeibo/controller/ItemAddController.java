@@ -13,7 +13,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -25,13 +28,14 @@ import net.sourceforge.tess4j.TesseractException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * ItemAddWindowに対応するController class
+ *
+ * @author 須藤
+ */
 public class ItemAddController {
 
     public TableView<DateItem> tableView;
@@ -43,7 +47,9 @@ public class ItemAddController {
     public Button closeButton;
     public Button finishButton;
 
-
+    /**
+     * 表の初期化設定
+     */
     public void initTableView() {
         ObservableList<String> categories = FXCollections.observableArrayList();
 
@@ -82,11 +88,20 @@ public class ItemAddController {
         priceColumn.setOnEditCommit(e -> tableView.getItems().get(e.getTablePosition().getRow()).setPrice(e.getNewValue()));
     }
 
+    /**
+     * レシート読み取りボタン押下時処理
+     *
+     * @throws TesseractException OCRでのエラー
+     * @throws IOException        ファイル入出力エラー
+     */
     public void onReadReceiptButtonPressed() throws TesseractException, IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(ItemAddWindow.getStage());
+        if (selectedFile == null) {
+            return;
+        }
         Image image = new Image(selectedFile.toURI().toString());
         BufferedImage img = SwingFXUtils.fromFXImage(image, null);
         OCRTool ocrTool = new OCRTool();
@@ -101,33 +116,48 @@ public class ItemAddController {
         }
     }
 
+    /**
+     * 表拡張ボタン押下時処理
+     * (現在日付, 空白, 未割当, 0円)の行を表に挿入する
+     */
     public void onExpandTableButtonPressed() {
         tableView.getItems().add(new DateItem(new Date(), "", Category.getUnassignedCategory(), 0));
     }
 
-
+    /**
+     * 行削除ボタン押下時処理
+     *
+     * @param actionEvent event
+     */
     public void onShrinkTableButtonPressed(ActionEvent actionEvent) {
         ObservableList<DateItem> ol = tableView.getItems();
         if (ol.size() == 0) {
             return;
         }
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+        // 選択されている行があればその行を削除, されていなければ最後の行を削除
         if (selectedIndex == -1) {
-            // delete last data
             ol.remove(ol.size() - 1);
         } else {
             ol.remove(selectedIndex);
         }
     }
 
+    /**
+     * キャンセルボタン押下時処理
+     */
     public void onCancelButtonPressed() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * 終了ボタン押下時処理
+     */
     public void onFinishButtonPressed() {
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
+        System.out.println(tableView.getItems().size());
         for (DateItem item : tableView.getItems()) {
             if (item.getName().equals("")) {
                 continue;
@@ -137,6 +167,7 @@ public class ItemAddController {
                 int year = Integer.parseInt(date[0]);
                 int month = Integer.parseInt(date[1]);
                 int day = Integer.parseInt(date[2]);
+                System.out.printf("%s, %s, %s\n", item.getName(), item.getCategory(), item.getPrice());
                 List<Item> saveItem = DataManager.getItemDataList(year, month, day);
                 saveItem.add(new Item(item.getName(), item.getCategory(), item.getPrice()));
                 DataManager.setSingleDayData(year, month, day, saveItem);
@@ -144,7 +175,6 @@ public class ItemAddController {
             }
         }
     }
-
 
 
 }
