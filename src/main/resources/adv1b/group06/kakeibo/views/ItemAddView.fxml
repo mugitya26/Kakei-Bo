@@ -25,7 +25,7 @@
             <Button mnemonicParsing="false" text="レシートを読み込む" onAction="#onReadReceiptButtonPressed"/>
         </HBox>
         <VBox alignment="CENTER" spacing="10.0">
-            <TableView prefHeight="500.0" prefWidth="500.0" fx:id="tableView">
+            <TableView prefHeight="500.0" prefWidth="500.0" fx:id="tableView" editable="true">
                 <columns>
                     <TableColumn text="日付" fx:id="dateColumn"/>
                     <TableColumn text="商品名" fx:id="nameColumn"/>
