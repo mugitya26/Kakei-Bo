@@ -7,10 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static javafx.application.Application.launch;
 
 /**
  * M4-1 外部出力処理を行うクラス
@@ -27,7 +24,6 @@ public class ExportFile {
      */
     public static int generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
-        //List<DateItem> date = new ArrayList<>();
         try (FileWriter writer = new FileWriter(filePath + ".csv")) {
             writer.append("日付,カテゴリ,商品名,支出");
             writer.append("\n");
