@@ -34,7 +34,9 @@ public class Category {
      * @param isPayout     支出:true, 収入:false
      */
     public Category(String categoryName, boolean isPayout) {
-        categories.put(categoryName, isPayout);
+        if (!categoryName.equals("未割当")) {
+            categories.put(categoryName, isPayout);
+        }
         this.name = categoryName;
         this.isPayout = isPayout;
     }
