@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import net.sourceforge.tess4j.TesseractException;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -103,8 +104,7 @@ public class ItemAddController {
         if (selectedFile == null) {
             return;
         }
-        Image image = new Image(selectedFile.toURI().toString());
-        BufferedImage img = SwingFXUtils.fromFXImage(image, null);
+        BufferedImage img = ImageIO.read(selectedFile);
         OCRTool ocrTool = new OCRTool();
         List<Pair<String, Integer>> items = ocrTool.getDataFromBufferedImage(img);
         for (Pair<String, Integer> item : items) {
