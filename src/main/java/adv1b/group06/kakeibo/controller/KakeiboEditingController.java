@@ -47,6 +47,7 @@ public class KakeiboEditingController {
         calendar.setTime(new Date());
         datePicker.setValue(LocalDate.now());
         loadItems(new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        calcSum();
         oldDate = LocalDate.now();
         datePicker.setOnAction(e -> {
             saveItems();
@@ -183,7 +184,7 @@ public class KakeiboEditingController {
         if (sumPrice > 0) {
             sumLabel.setText("+" + sumPrice);
         } else {
-            sumLabel.setText(String.format("%d円", sumPrice));
+            sumLabel.setText(String.format("計 %d円", sumPrice));
         }
     }
 }
