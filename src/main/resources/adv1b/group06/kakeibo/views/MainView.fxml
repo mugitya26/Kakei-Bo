@@ -31,7 +31,7 @@
                 <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#onPrevMonthButtonPressed" text="&lt;" />
-                        <Label prefHeight="24.0" prefWidth="60.0" text="2023年 5月" />
+                        <Label prefHeight="24.0" prefWidth="60.0" text="2023年 5月" fx:id="dateLabel"/>
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNextMonthButtonPressed" text="&gt;" />
                     </children>
                     <VBox.margin>
@@ -53,7 +53,6 @@
                             <children>
                                 <TableView fx:id="table" prefHeight="100.0" prefWidth="200.0">
                                     <columns>
-                                        <TableColumn fx:id="nameColumn" editable="false" prefWidth="75.0" text="品目名" />
                                         <TableColumn fx:id="categoryColumn" editable="false" prefWidth="75.0" text="カテゴリ" />
                                         <TableColumn fx:id="priceColumn" editable="false" prefWidth="75.0" text="価格" />
                                     </columns>

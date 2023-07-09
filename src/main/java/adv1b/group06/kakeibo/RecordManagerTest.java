@@ -6,6 +6,7 @@ import adv1b.group06.kakeibo.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class RecordManagerTest {
     // 仮のクラス
     // 表示確認用などに利用
