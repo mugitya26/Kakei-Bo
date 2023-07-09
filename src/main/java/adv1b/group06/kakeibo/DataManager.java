@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
  * @author 荻野
  */
 public class DataManager {
-    private static final String directoryPath = "src/main/resources/adv1b/group06/kakeibo/data";
+    private static final String directoryPath = "data";
 
     /**
      * 日付を指定してファイル名を取得する
