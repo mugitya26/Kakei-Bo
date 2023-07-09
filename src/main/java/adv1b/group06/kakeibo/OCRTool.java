@@ -29,8 +29,7 @@ public class OCRTool {
 
     public OCRTool() {
         resPath = Objects.requireNonNull(this.getClass().getResource("")).toString();
-        resPath = resPath.substring(resPath.indexOf(':') + 1);
-
+        resPath = resPath.substring(resPath.indexOf(':') + 2);
         instance = new Tesseract();
         instance.setVariable("user_defined_dpi", "300");
         instance.setDatapath(resPath + "traineddata");

@@ -18,7 +18,7 @@ import java.util.List;
  * @author 須藤
  */
 public class WordCategorize {
-    private static String key;
+    private static String key = "";
 
     /**
      * OpenAIのAPI keyのsetter
@@ -36,6 +36,10 @@ public class WordCategorize {
      * @return カテゴリ
      */
     public static Category fetchCategory(String item) {
+        if (key == null || key.equals("")) {
+            System.out.println("No API key");
+            return Category.getUnassignedCategory();
+        }
         try {
             // APIエンドポイントのURLを指定
             URL url = new URI("https://api.openai.com/v1/chat/completions").toURL();
