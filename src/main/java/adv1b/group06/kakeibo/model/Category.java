@@ -21,7 +21,7 @@ public class Category {
     private static final Map<String, Boolean> categories = new HashMap<String, Boolean>() {
         {
             put("収入", false);
-            put("食料品", false);
+            put("食料品", true);
             put("雑貨", true);
             put("その他", true);
         }
