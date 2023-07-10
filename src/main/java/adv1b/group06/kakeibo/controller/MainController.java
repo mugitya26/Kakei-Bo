@@ -179,7 +179,7 @@ public class MainController {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, deltaMonth);
         List<Item> monthlyData = new ArrayList<>();
-        for (int d = 1; d <= calendar.get(Calendar.DAY_OF_MONTH); d++) {
+        for (int d = 1; d <= 31; d++) {
             monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, d));
         }
         setData(monthlyData);
