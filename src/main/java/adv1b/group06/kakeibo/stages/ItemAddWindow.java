@@ -3,6 +3,7 @@ package adv1b.group06.kakeibo.stages;
 import adv1b.group06.kakeibo.controller.ItemAddController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class ItemAddWindow extends Stage {
         setTitle("Kakei-Bo(品目を追加)");
         setScene(scene);
         initOwner(stage);
+        initModality(Modality.WINDOW_MODAL);
         ItemAddController controller = fxmlLoader.getController();
         controller.initTableView();
 

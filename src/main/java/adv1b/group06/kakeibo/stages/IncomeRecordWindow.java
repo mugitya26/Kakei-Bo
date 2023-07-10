@@ -3,6 +3,7 @@ package adv1b.group06.kakeibo.stages;
 import adv1b.group06.kakeibo.controller.IncomeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -22,6 +23,7 @@ public class IncomeRecordWindow extends Stage {
         IncomeController incomeController = fxmlLoader.getController();
         incomeController.initWindow();
         initOwner(stage);
+        initModality(Modality.WINDOW_MODAL);
         stage=this;
     }
 
