@@ -42,6 +42,7 @@ public class ExportController implements Initializable {
     public Label folder;
     String newFileName;
     File selectedDirectory;
+    String folderPath;
     String selectedFolderPath;
     String newSelectedFolderPath;
 
@@ -117,6 +118,10 @@ public class ExportController implements Initializable {
                 month.getSelectionModel().selectFirst(); // 最初の月を選択
             }
         });
+
+        fileName.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateFileName();
+        });
     }
 
     /**
@@ -124,11 +129,16 @@ public class ExportController implements Initializable {
      */
     @FXML
     public void updateFileName() {
-        String selectedYear = years.getValue();
-        String selectedMonth = month.getValue();
-        if (selectedYear != null && selectedMonth != null) {
-            String formattedMonth = String.format("%02d", Integer.parseInt(selectedMonth));
-            newFileName = selectedYear + "-" + formattedMonth;
+        String userInput = fileName.getText();
+        if (!userInput.isEmpty()) {
+            newFileName = userInput;
+        } else {
+            String selectedYear = years.getValue();
+            String selectedMonth = month.getValue();
+            if (selectedYear != null && selectedMonth != null) {
+                String formattedMonth = String.format("%02d", Integer.parseInt(selectedMonth));
+                newFileName = selectedYear + "-" + formattedMonth;
+            }
         }
     }
 
@@ -156,6 +166,7 @@ public class ExportController implements Initializable {
         if (monthString != null) {
             month = Integer.parseInt(monthString);
         }
+        updateFileName();
         boolean XLSX = xlsx.isSelected();
         boolean CSV = csv.isSelected();
         if (year == 0 || month == 0) {
@@ -166,9 +177,7 @@ public class ExportController implements Initializable {
             }));
             timeline.play();
         } else {
-            if (!fileName.getText().isEmpty()) {
-                selectedFolderPath += fileName.getText();
-            }
+            folderPath=selectedFolderPath;
             if (selectedFolderPath == null) {
                 folder.setText("出力先を選択してください");
                 folder.setStyle("-fx-text-fill: red;");
@@ -180,7 +189,7 @@ public class ExportController implements Initializable {
                     if (!fileName.getText().isEmpty()) {
                         newFileName = fileName.getText();
                     }
-                    newSelectedFolderPath = selectedFolderPath + newFileName;
+                    newSelectedFolderPath = folderPath + newFileName;
                     if (CSV) {
                         ExportFile.generateCSV(year, month, newSelectedFolderPath);
                         folder.setText("出力に成功しました。" + newFileName);
