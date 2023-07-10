@@ -45,7 +45,7 @@ public class ExportController implements Initializable {
     String selectedFolderPath;
     String newSelectedFolderPath;
 
-    private static final String directoryPath = "src/main/resources/adv1b/group06/kakeibo/data";
+    private static final String directoryPath = "data";
 
     /**
      * データが格納されているディレクトリから全てのjsonファイルを取得し、
