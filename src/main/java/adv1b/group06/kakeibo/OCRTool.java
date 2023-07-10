@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * レシートが中央に垂直に配置されている画像をデータに変換することができる
+ * レシートが中央に垂直に配置されている画像をデータに変換できる
  * @author 荻野
  */
 public class OCRTool {
     public static void main(String[] args) {
         OCRTool tool = new OCRTool();
-        var res = tool.getDataFromImgPath("images/DSC_0267.jpg");
+        var res = tool.getDataFromImgPath("images/img01.jpg");
         for (var pair : res) {
             System.out.println(pair.toString());
         }
@@ -43,7 +43,7 @@ public class OCRTool {
      */
     public List<Pair<String, Integer>> getDataFromImgPath(String imagePath) {
         try {
-            return getDataFromBufferedImage(ImageIO.read(new File(resPath + imagePath)));
+            return getDataFromBufferedImage(ImageIO.read(new File(imagePath)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
