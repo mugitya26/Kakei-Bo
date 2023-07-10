@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo.controller;
 
 import adv1b.group06.kakeibo.DataManager;
+import adv1b.group06.kakeibo.DialogGenerator;
 import adv1b.group06.kakeibo.OCRTool;
 import adv1b.group06.kakeibo.WordCategorize;
 import adv1b.group06.kakeibo.model.Category;
@@ -47,18 +48,15 @@ public class ItemAddController {
     public Button closeButton;
     public Button finishButton;
 
+
     /**
      * 表の初期化設定
      */
     public void initTableView() {
-        ObservableList<String> categories = FXCollections.observableArrayList();
-
         // init TableView
         tableView.setItems(FXCollections.observableArrayList());
         tableView.setPlaceholder(new Label("[+]ボタンを押して行を追加してください"));
-        for (Category c : Category.getCategoriesList()) {
-            categories.add(c.toString());
-        }
+
 
         // init each column
         dateColumn.setCellValueFactory(param -> param.getValue().dateProperty());
@@ -70,9 +68,25 @@ public class ItemAddController {
         nameColumn.setOnEditCommit(e -> tableView.getItems().get(e.getTablePosition().getRow()).setName(e.getNewValue()));
 
         categoryColumn.setCellValueFactory(param -> param.getValue().categoryProperty());
-        categoryColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(categories));
+        updateCategoryList();
         categoryColumn.setOnEditCommit(e -> {
             String categoryName = e.getNewValue();
+            if (categoryName.equals("消費カテゴリを追加")) {
+                Category newCategory = DialogGenerator.createNewCategoryDialog(true);
+                if (newCategory != null) {
+                    tableView.getItems().get(e.getTablePosition().getRow()).setCategory(newCategory);
+                    updateCategoryList();
+                }
+                return;
+            }
+            if (categoryName.equals("収入カテゴリを追加")) {
+                Category newCategory = DialogGenerator.createNewCategoryDialog(false);
+                if (newCategory != null) {
+                    tableView.getItems().get(e.getTablePosition().getRow()).setCategory(newCategory);
+                    updateCategoryList();
+                }
+                return;
+            }
             for (Category category : Category.getCategoriesList()) {
                 if (category.toString().equals(categoryName)) {
                     tableView.getItems().get(e.getTablePosition().getRow()).setCategory(category);
@@ -169,6 +183,16 @@ public class ItemAddController {
         }
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
+    }
+
+    private void updateCategoryList() {
+        ObservableList<String> categories = FXCollections.observableArrayList();
+        for (Category c : Category.getCategoriesList()) {
+            categories.add(c.toString());
+        }
+        categories.add("消費カテゴリを追加");
+        categories.add("収入カテゴリを追加");
+        categoryColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(categories));
     }
 
 
