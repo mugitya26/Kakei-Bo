@@ -3,8 +3,6 @@ package adv1b.group06.kakeibo.stages;
 import adv1b.group06.kakeibo.controller.IncomeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -15,8 +13,6 @@ public class IncomeRecordWindow extends Stage {
 
     /**
      * IncomeViewをステージする関数
-     * @param stage
-     * @throws Exception
      */
     public IncomeRecordWindow(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adv1b/group06/kakeibo/views/IncomeView.fxml"));

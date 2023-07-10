@@ -24,8 +24,6 @@ public class MainWindow extends Application {
 
     /**
      * メインウィンドウの表示
-     * @param stage
-     * @throws IOException
      */
     @Override
     public void start(Stage stage) throws IOException {

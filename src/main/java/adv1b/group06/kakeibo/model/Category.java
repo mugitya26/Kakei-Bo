@@ -1,7 +1,5 @@
 package adv1b.group06.kakeibo.model;
 
-import adv1b.group06.kakeibo.DataManager;
-
 import java.util.*;
 
 /**
