@@ -1,7 +1,6 @@
 package adv1b.group06.kakeibo;
 
 import adv1b.group06.kakeibo.model.Category;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * ダイアログを出すメソッドを持つクラス
  *
- * @author 荻野
+ * @author 町田
  */
 public class DialogGenerator {
     /**
