@@ -2,7 +2,6 @@ package adv1b.group06.kakeibo.tablecells;
 
 
 import adv1b.group06.kakeibo.model.DateItem;
-import adv1b.group06.kakeibo.model.Item;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 

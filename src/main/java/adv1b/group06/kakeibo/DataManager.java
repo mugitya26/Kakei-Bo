@@ -31,22 +31,6 @@ public class DataManager {
     }
 
     /**
-     * 月を指定して統計を計算する
-     *
-     * @return 計算結果
-     */
-    public static StatisticsInfo getMonthStaticsData(int year, int month) {
-        StatisticsInfo statisticsInfo = new StatisticsInfo(year, month);
-        for (int i = 1; i <= 31; i++) {
-            var list = getItemDataList(year, month, i);
-            for (Item item : list) {
-                statisticsInfo.addItem(item);
-            }
-        }
-        return statisticsInfo;
-    }
-
-    /**
      * 日付を指定して、登録されているデータをリストで返す
      *
      * @return データが存在しなかった場合にはnullではない、長さ0のリストを返す

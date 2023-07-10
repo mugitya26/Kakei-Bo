@@ -5,9 +5,6 @@ import java.util.List;
 
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
-import adv1b.group06.kakeibo.model.StatisticsInfo;
-
-import javax.xml.crypto.Data;
 
 /**
  * DataManagerクラスのテストを行う
@@ -37,8 +34,5 @@ class DataManagerTest {
         for (Item item : sampleOutput) {
             System.out.printf("ItemName=\"%s\"%n", item.getName());
         }
-        // 統計テスト
-        StatisticsInfo info = DataManager.getMonthStaticsData(year, month);
-        System.out.printf("year=%04d,month=%02d,payout=%d%n", year, month, info.getPayout());
     }
 }
