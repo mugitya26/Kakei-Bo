@@ -51,8 +51,6 @@ public class IncomeController {
 
     /**
      * 完了ボタンに紐づけられているイベントハンドラー
-     *
-     * @param actionEvent
      */
     public void onFinishButtonPressed(javafx.event.ActionEvent actionEvent) { //textfieldとdatepickerから値を獲得
         int price = Integer.parseInt(incomeValue.getText());

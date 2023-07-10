@@ -24,9 +24,6 @@ public class DataManager {
     /**
      * 日付を指定してファイル名を取得する
      *
-     * @param year
-     * @param month
-     * @param date
      * @return String
      */
     private static String getFileName(int year, int month, int date) {
@@ -36,8 +33,6 @@ public class DataManager {
     /**
      * 月を指定して統計を計算する
      *
-     * @param year
-     * @param month
      * @return 計算結果
      */
     public static StatisticsInfo getMonthStaticsData(int year, int month) {
@@ -54,9 +49,6 @@ public class DataManager {
     /**
      * 日付を指定して、登録されているデータをリストで返す
      *
-     * @param year
-     * @param month
-     * @param date
      * @return データが存在しなかった場合にはnullではない、長さ0のリストを返す
      */
     public static List<Item> getItemDataList(int year, int month, int date) {
@@ -90,9 +82,6 @@ public class DataManager {
     /**
      * 日付を指定してデータを保存する。指定日の既存データは上書きされる。
      *
-     * @param year
-     * @param month
-     * @param date
      * @param items 保存するデータ
      */
     public static void setSingleDayData(int year, int month, int date, List<Item> items) {

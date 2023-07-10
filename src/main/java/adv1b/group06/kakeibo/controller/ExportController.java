@@ -77,9 +77,6 @@ public class ExportController implements Initializable {
      * 初期化メソッド。ChoiceBoxに年と月の選択肢を追加する。選択肢は家計簿データが存在する年と月のみ。
      * 年が選択された場合、その年に存在するデータのみを月のChoiceBoxに追加する。
      * 初期選択はデータが存在する最新の年と月。
-     *
-     * @param arg0
-     * @param arg1
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
