@@ -45,6 +45,10 @@ public class IncomeController {
     @FXML
     private TextField incomeValue;
 
+    /**
+     * 初期化処理
+     * 収入の入力部分を整数しか入力を受け取らないようにする
+     */
     public void initWindow() {
         incomeValue.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -61,6 +65,9 @@ public class IncomeController {
         });
     }
 
+    /**
+     * 収入記録画面でキャンセルボタンが押された時、データの反映などはせずに収入記録ウィンドウを閉じる
+     */
     @FXML
     public void onCancelButtonPressed() throws Exception {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
