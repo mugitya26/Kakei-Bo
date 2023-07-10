@@ -115,6 +115,7 @@ public class KakeiboEditingController {
         } else {
             ol.remove(selectedIndex);
         }
+        calcSum();
     }
 
     /**
