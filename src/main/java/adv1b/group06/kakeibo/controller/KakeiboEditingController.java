@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo.controller;
 
 import adv1b.group06.kakeibo.DataManager;
+import adv1b.group06.kakeibo.DialogGenerator;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.DateItem;
 import adv1b.group06.kakeibo.model.Item;
@@ -59,12 +60,10 @@ public class KakeiboEditingController {
 
     private void initTableView() {
         ObservableList<String> categories = FXCollections.observableArrayList();
+
         // init TableView
         tableView.setItems(FXCollections.observableArrayList());
         tableView.setPlaceholder(new Label("[追加]ボタンを押して行を追加してください"));
-        for (Category c : Category.getCategoriesList()) {
-            categories.add(c.toString());
-        }
 
         // init each column
         nameColumn.setCellValueFactory(param -> param.getValue().nameProperty());
@@ -72,9 +71,22 @@ public class KakeiboEditingController {
         nameColumn.setOnEditCommit(e -> tableView.getItems().get(e.getTablePosition().getRow()).setName(e.getNewValue()));
 
         categoryColumn.setCellValueFactory(param -> param.getValue().categoryProperty());
-        categoryColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(categories));
+        updateCategoryList();
         categoryColumn.setOnEditCommit(e -> {
             String categoryName = e.getNewValue();
+            if (categoryName.equals("消費カテゴリを追加")) {
+                DialogGenerator.createNewCategoryDialog(true);
+                return;
+            }
+            if (categoryName.equals("収入カテゴリを追加")) {
+                DialogGenerator.createNewCategoryDialog(false);
+                return;
+            }
+            if (categoryName.equals("カテゴリを削除")) {
+                DialogGenerator.deleteCategoryDialog();
+
+                return;
+            }
             for (Category category : Category.getCategoriesList()) {
                 if (category.toString().equals(categoryName)) {
                     tableView.getItems().get(e.getTablePosition().getRow()).setCategory(category);
@@ -187,5 +199,16 @@ public class KakeiboEditingController {
         } else {
             sumLabel.setText(String.format("計 %d円", sumPrice));
         }
+    }
+
+    private void updateCategoryList() {
+        ObservableList<String> categories = FXCollections.observableArrayList();
+        for (Category c : Category.getCategoriesList()) {
+            categories.add(c.toString());
+        }
+        categories.add("消費カテゴリを追加");
+        categories.add("収入カテゴリを追加");
+        categories.add("カテゴリを削除");
+        categoryColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(categories));
     }
 }

@@ -49,6 +49,10 @@ public class Category {
         return list;
     }
 
+    public static void deleteCategory(String categoryName) {
+        categories.remove(categoryName);
+    }
+
     /**
      * nameの値のみを返す。
      */
