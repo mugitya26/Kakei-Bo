@@ -2,6 +2,7 @@ package adv1b.group06.kakeibo.stages;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -17,5 +18,6 @@ public class ExportWindow extends Stage {
         setTitle("外部出力");
         setScene(scene);
         initOwner(stage);
+        initModality(Modality.WINDOW_MODAL);
     }
 }
