@@ -8,7 +8,7 @@ module adv1b.group06.kakeibo {
     requires org.apache.poi.ooxml;
 
 
-    opens adv1b.group06.kakeibo to javafx.fxml;
+    opens adv1b.group06.kakeibo to javafx.fxml, com.google.gson;
     opens adv1b.group06.kakeibo.controller to javafx.fxml;
     opens adv1b.group06.kakeibo.model to javafx.base;
 
