@@ -175,7 +175,7 @@ public class MainController {
         updateData();
     }
 
-    private void updateData() {
+    public void updateData() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, deltaMonth);
         List<Item> monthlyData = new ArrayList<>();

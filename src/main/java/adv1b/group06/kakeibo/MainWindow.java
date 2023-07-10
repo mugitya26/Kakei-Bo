@@ -4,6 +4,7 @@ package adv1b.group06.kakeibo;
 import adv1b.group06.kakeibo.controller.MainController;
 import adv1b.group06.kakeibo.model.Item;
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -43,6 +44,11 @@ public class MainWindow extends Application {
             monthlyData.addAll(DataManager.getItemDataList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, d));
         }
         controller.setData(monthlyData);
+        stage.focusedProperty().addListener(p -> {
+            if(((ReadOnlyBooleanProperty)p).getValue()) {
+                controller.updateData();
+            }
+        });
         MainWindow.stage = stage;
 
         stage.show();
