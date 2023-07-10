@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo;
 
 import adv1b.group06.kakeibo.model.Category;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 
 /**
@@ -22,5 +23,16 @@ public class DialogGenerator {
         dialog.setContentText("カテゴリ名");
         var msg = dialog.showAndWait();
         return msg.map(s -> new Category(s, isPayout)).orElse(null);
+    }
+
+    /**
+     * エラーアラートを表示する。
+     *
+     * @param message ユーザーに表示するメッセージ
+     */
+    public static void createNewErrorAlert(String message){
+        var dialog = new Alert(Alert.AlertType.WARNING);
+        dialog.setContentText(message);
+        dialog.showAndWait();
     }
 }
