@@ -45,6 +45,22 @@ public class IncomeController {
     @FXML
     private TextField incomeValue;
 
+    public void initWindow() {
+        incomeValue.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                // 数字以外の入力があった場合はキャンセルする
+                incomeValue.setText(oldValue);
+                return;
+            }
+            // 数字入力
+            if (oldValue.equals("") || newValue.equals("")) {
+                incomeValue.setText("0");
+            } else {
+                incomeValue.setText(newValue);
+            }
+        });
+    }
+
     @FXML
     public void onCancelButtonPressed() throws Exception {
         Stage stage = (Stage) cancelButton.getScene().getWindow();

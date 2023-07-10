@@ -24,6 +24,7 @@ public class IncomeRecordWindow extends Stage {
         setTitle("収入記録");
         setScene(scene);
         IncomeController incomeController = fxmlLoader.getController();
+        incomeController.initWindow();
         initOwner(stage);
         stage=this;
     }
