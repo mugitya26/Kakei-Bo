@@ -1,6 +1,7 @@
 package adv1b.group06.kakeibo.controller;
 
 import adv1b.group06.kakeibo.DataManager;
+import adv1b.group06.kakeibo.DialogGenerator;
 import adv1b.group06.kakeibo.model.Category;
 import adv1b.group06.kakeibo.model.Item;
 import adv1b.group06.kakeibo.DataManager.*;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -51,12 +53,28 @@ public class IncomeController {
 
     /**
      * 完了ボタンに紐づけられているイベントハンドラー
+     * textfieldとdatepickerから値を獲得し、データとして記録する
      *
      * @param actionEvent
      */
-    public void onFinishButtonPressed(javafx.event.ActionEvent actionEvent) { //textfieldとdatepickerから値を獲得
-        int price = Integer.parseInt(incomeValue.getText());
+    public void onFinishButtonPressed(javafx.event.ActionEvent actionEvent) {
+        int price = 0;
+        try {
+            price = Integer.parseInt(incomeValue.getText());
+        } catch (NumberFormatException e) {
+            DialogGenerator.createNewErrorAlert("収入には1以上の整数を入力してください。");
+            return;
+        }
+        if (price <= 0) {
+            DialogGenerator.createNewErrorAlert("収入には1以上の整数を入力してください。");
+            return;
+        }
+
         LocalDate selectedDate = datePicker.getValue();
+        if (selectedDate == null) {
+            DialogGenerator.createNewErrorAlert("日付を選択してください。");
+            return;
+        }
 
         //収入として生成したItem
         Item Income = new Item("収入", new Category("収入", false), price);
