@@ -194,7 +194,7 @@ public class ExportController implements Initializable {
                     choiceFile.setText("出力したいファイルの形式を選択");
                     choiceFile.setStyle("-fx-text-fill: black;");
                     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), evt -> {
-                        folder.setText(selectedFolderPath);
+                        folder.setText("出力先を選択してください");
                         folder.setStyle("-fx-text-fill: black;");
                     }));
                     timeline.play();
@@ -225,5 +225,6 @@ public class ExportController implements Initializable {
     @FXML
     public void clear() {
         fileName.clear();
+        updateFileName();
     }
 }
