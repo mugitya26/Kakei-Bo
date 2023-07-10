@@ -87,6 +87,24 @@ public class ItemAddController {
                 }
                 return;
             }
+            if (categoryName.equals("カテゴリを削除")) {
+                DialogGenerator.deleteCategoryDialog();
+                updateCategoryList();
+
+                String oldSelectedCategory = e.getOldValue();
+                if (oldSelectedCategory.equals(Category.getUnassignedCategory().toString())) {
+                    tableView.getItems().get(e.getTablePosition().getRow()).setCategory(Category.getUnassignedCategory());
+                } else {
+                    for (Category c : Category.getCategoriesList()) {
+                        if (c.toString().equals(oldSelectedCategory)) {
+                            tableView.getItems().get(e.getTablePosition().getRow()).setCategory(c);
+                            return;
+                        }
+                    }
+                    tableView.getItems().get(e.getTablePosition().getRow()).setCategory(Category.getUnassignedCategory());
+                }
+                return;
+            }
             for (Category category : Category.getCategoriesList()) {
                 if (category.toString().equals(categoryName)) {
                     tableView.getItems().get(e.getTablePosition().getRow()).setCategory(category);
@@ -192,6 +210,7 @@ public class ItemAddController {
         }
         categories.add("消費カテゴリを追加");
         categories.add("収入カテゴリを追加");
+        categories.add("カテゴリを削除");
         categoryColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(categories));
     }
 
