@@ -13,15 +13,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adv1b.group06.kakeibo.controller.MainController">
     <top>
-        <MenuBar BorderPane.alignment="CENTER" fx:id="menuBar">
+        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" onAction="#onShowIncomeRecordWindowButtonPressed" text="収入記録" />
                 <Menu mnemonicParsing="false" onAction="#onShowItemAddWindowButtonPressed" text="品目追加" />
                 <Menu mnemonicParsing="false" onAction="#onShowEditWindowButtonPressed" text="編集" />
                 <Menu mnemonicParsing="false" onAction="#onShowExportWindowButtonPressed" text="エクスポート" />
-                <Menu mnemonicParsing="false" onAction="#onShowSettingWindowButtonPressed" text="設定" />
             </menus>
         </MenuBar>
     </top>
@@ -31,7 +30,7 @@
                 <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#onPrevMonthButtonPressed" text="&lt;" />
-                        <Label prefHeight="24.0" prefWidth="60.0" text="2023年 5月" fx:id="dateLabel"/>
+                        <Label fx:id="dateLabel" prefHeight="24.0" prefWidth="60.0" text="2023年 5月" />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNextMonthButtonPressed" text="&gt;" />
                     </children>
                     <VBox.margin>
@@ -40,7 +39,7 @@
                 </HBox>
             <BorderPane prefWidth="600.0">
                <center>
-                      <Label text="収入 ￥1000 - 支出 ￥500 = 収支 ￥500" BorderPane.alignment="CENTER" fx:id="summary">
+                      <Label fx:id="summary" text="収入 ￥1000 - 支出 ￥500 = 収支 ￥500" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

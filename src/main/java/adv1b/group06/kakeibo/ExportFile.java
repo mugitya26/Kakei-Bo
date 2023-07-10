@@ -17,10 +17,6 @@ import java.util.List;
 public class ExportFile {
     /**
      * 年と月と出力先のパスを指定して家計簿のデータCSVに出力する
-     *
-     * @param year
-     * @param month
-     * @param filePath
      */
     public static void generateCSV(int year, int month, String filePath) {
         List<Item> kakeiboData;
@@ -50,10 +46,6 @@ public class ExportFile {
 
     /**
      * 年と月と出力先のパスを指定して家計簿のデータをxlsxファイルを出力する
-     *
-     * @param year
-     * @param month
-     * @param filePath
      */
     public static void generateXlsx(int year, int month, String filePath) {
         List<Item> kakeiboData;

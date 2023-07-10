@@ -12,11 +12,6 @@ public class ItemJsonObj implements Serializable {
     public Integer price;
     public boolean isPayout;
 
-    /**
-     * @param name
-     * @param category
-     * @param price
-     */
     public ItemJsonObj(String name, Category category, int price) {
         this.name = name;
         this.categoryName = category.toString();
@@ -26,7 +21,6 @@ public class ItemJsonObj implements Serializable {
 
     /**
      * Itemをシリアライズ可能なItemJsonObjに変換する
-     * @param item
      */
     public ItemJsonObj(Item item) {
         if (item == null)

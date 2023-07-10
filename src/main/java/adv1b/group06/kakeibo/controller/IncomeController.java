@@ -70,7 +70,6 @@ public class IncomeController {
 
     /**
      * 完了ボタンに紐づけられているイベントハンドラー
-     * textfieldとdatepickerから値を獲得し、データとして記録する
      */
     public void onFinishButtonPressed() {
         int price = 0;
