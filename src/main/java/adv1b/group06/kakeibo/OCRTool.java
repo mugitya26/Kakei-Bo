@@ -5,8 +5,7 @@ import net.sourceforge.tess4j.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +32,7 @@ public class OCRTool {
         instance = new Tesseract();
         instance.setVariable("user_defined_dpi", "300");
         instance.setDatapath(resPath + "traineddata");
+        loadApiKey();
     }
 
     /**
@@ -155,5 +155,24 @@ public class OCRTool {
             result.add(new Pair<>(nameList.get(i), valueList.get(i)));
         }
         return result;
+    }
+
+    private void loadApiKey() {
+        File keyFile = new File("key");
+        if (!keyFile.exists()) {
+            try {
+                keyFile.createNewFile();
+            } catch (IOException e) {
+                DialogGenerator.createNewErrorAlert("ファイルの書き込みに失敗しました");
+            }
+            return;
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(keyFile));
+            WordCategorize.setKey(reader.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
