@@ -41,5 +41,6 @@ build/
 
 # Jsonファイルが配置されているディレクトリ
 /src/main/resources/adv1b/group06/kakeibo/data
+key
 data
 settings.json
