@@ -6,7 +6,7 @@
 
 ## 実行方法
 
-まず、[IntelliJ IDEA Community](https://www.jetbrains.com/ja-jp/idea/download/)のプロジェクト選択画面で`README.md`や`pom.xml`が配置されているディレクトリを選択して本プロジェクトを開いてください。
+まず、[IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/download/)のプロジェクト選択画面で`README.md`や`pom.xml`が配置されているディレクトリを選択して本プロジェクトを開いてください。
 
 次に、`src/main/java/adv1b/group06/kakeibo/Kakeibo.java`を実行してください。
 
