@@ -3,6 +3,12 @@ package adv1b.group06.kakeibo.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 月の収支の合計を格納するためのクラス
+ *
+ * @author 荻野
+ * @deprecated
+ */
 public class StatisticsInfo {
     private final Integer year;
     private final Integer month;
@@ -22,6 +28,11 @@ public class StatisticsInfo {
         this.payout = 0;
     }
 
+    /**
+     * 統計にアイテムを反映する
+     *
+     * @param item 追加するアイテム
+     */
     public void addItem(Item item) {
         Integer i = detail.get(item.getCategory());
         if (i == null) {
