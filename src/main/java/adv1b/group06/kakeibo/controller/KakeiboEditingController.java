@@ -130,9 +130,9 @@ public class KakeiboEditingController {
      * 終了ボタン押下時処理
      */
     public void onFinishButtonPressed() {
+        saveItems();
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
-        saveItems();
     }
 
 

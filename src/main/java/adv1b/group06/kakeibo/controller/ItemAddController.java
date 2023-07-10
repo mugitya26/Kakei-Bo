@@ -156,8 +156,6 @@ public class ItemAddController {
      * 終了ボタン押下時処理
      */
     public void onFinishButtonPressed() {
-        Stage stage = (Stage) finishButton.getScene().getWindow();
-        stage.close();
         for (DateItem item : tableView.getItems()) {
             if (item.getName().equals("")) {
                 continue;
@@ -170,8 +168,9 @@ public class ItemAddController {
             List<Item> saveItem = DataManager.getItemDataList(year, month, day);
             saveItem.add(new Item(item.getName(), item.getCategory(), item.getPrice()));
             DataManager.setSingleDayData(year, month, day, saveItem);
-
         }
+        Stage stage = (Stage) finishButton.getScene().getWindow();
+        stage.close();
     }
 
 
