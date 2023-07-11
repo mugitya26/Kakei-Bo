@@ -27,17 +27,17 @@ public class PriceTableCell extends TableCell<DateItem, Integer> {
         }
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue.equals("")) {
+                textField.setText("");
+                return;
+            }
+            if (!newValue.matches("[1-9][0-9]*")) {
                 // 数字以外の入力があった場合はキャンセルする
                 textField.setText(oldValue);
                 return;
             }
             // 数字入力
-            if (oldValue.equals("") || newValue.equals("")) {
-                setItem(0);
-            } else {
-                setItem(Integer.valueOf(newValue));
-            }
+            setItem(Integer.valueOf(newValue));
         });
 
         textField.setOnAction(e -> {
