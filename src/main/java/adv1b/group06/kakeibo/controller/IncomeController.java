@@ -45,16 +45,13 @@ public class IncomeController {
      */
     public void initWindow() {
         incomeValue.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                // 数字以外の入力があった場合はキャンセルする
-                incomeValue.setText(oldValue);
+            if (newValue.equals("")) {
+                incomeValue.setText("");
                 return;
             }
-            // 数字入力
-            if (oldValue.equals("") || newValue.equals("")) {
-                incomeValue.setText("0");
-            } else {
-                incomeValue.setText(newValue);
+            if (!newValue.matches("[1-9][0-9]*")) {
+                // 数字以外の入力があった場合はキャンセルする
+                incomeValue.setText(oldValue);
             }
         });
     }
