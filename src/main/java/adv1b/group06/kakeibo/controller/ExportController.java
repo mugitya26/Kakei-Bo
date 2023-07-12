@@ -203,7 +203,7 @@ public class ExportController implements Initializable {
                     choiceFile.setText("出力したいファイルの形式を選択");
                     choiceFile.setStyle("-fx-text-fill: black;");
                     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), evt -> {
-                        folder.setText("出力先を選択してください");
+                        folder.setText(folderPath);
                         folder.setStyle("-fx-text-fill: black;");
                     }));
                     timeline.play();
