@@ -6,6 +6,14 @@
 
 ## 実行方法
 
+### exeファイルから実行する場合
+
+まず、Java 17以上をインストールしてください。
+
+そして、exeファイルをダブルクリックすれば実行することができます。
+
+### IntelliJ IDEAから実行する場合
+
 まず、[IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/download/)のプロジェクト選択画面で`README.md`や`pom.xml`が配置されているディレクトリを選択して本プロジェクトを開いてください。
 
 次に、`src/main/java/adv1b/group06/kakeibo/Kakeibo.java`を実行してください。
