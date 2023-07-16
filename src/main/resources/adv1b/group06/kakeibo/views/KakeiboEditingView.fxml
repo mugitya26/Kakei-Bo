@@ -80,8 +80,8 @@
                 <RowConstraints minHeight="-Infinity" prefHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="60.0" mnemonicParsing="false" text="キャンセル" textAlignment="CENTER" GridPane.columnIndex="1" fx:id="cancelButton" onAction="#onCancelButtonPressed"/>
-                  <Button maxHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" text="完了" textAlignment="CENTER" fx:id="finishButton" onAction="#onFinishButtonPressed"/>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="60.0" mnemonicParsing="false" text="キャンセル" textAlignment="CENTER" GridPane.columnIndex="0" fx:id="cancelButton" onAction="#onCancelButtonPressed"/>
+                  <Button maxHeight="-Infinity" minWidth="60.0" mnemonicParsing="false" text="完了" textAlignment="CENTER" fx:id="finishButton" GridPane.columnIndex="1" onAction="#onFinishButtonPressed"/>
                </children>
             </GridPane>
         </items>
