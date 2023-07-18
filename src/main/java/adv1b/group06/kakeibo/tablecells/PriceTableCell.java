@@ -13,6 +13,10 @@ import javafx.scene.control.TextField;
 public class PriceTableCell extends TableCell<DateItem, Integer> {
     TextField textField;
 
+    /**
+     * 編集を開始したときの処理
+     * 数字以外の入力を受け付けないセルを生成し表示する
+     */
     @Override
     public void startEdit() {
         if (isEmpty()) {
@@ -49,6 +53,11 @@ public class PriceTableCell extends TableCell<DateItem, Integer> {
         setGraphic(textField);
     }
 
+    /**
+     * セルの表示が更新されたときに呼ばれる処理
+     * @param item 新しい数字
+     * @param empty itemにデータがあるかどうか
+     */
     @Override
     protected void updateItem(Integer item, boolean empty) {
         super.updateItem(item, empty);
