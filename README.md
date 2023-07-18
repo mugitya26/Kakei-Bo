@@ -34,3 +34,12 @@ OCRに利用できるサンプル画像はプロジェクトのルートディ�
 家計簿データを保存するJSONファイルについては同じくルート直下の`data`フォルダに配置されます。
 
 Tesseractに利用する学習データについては、`src/main/resources/adv1b/group06/kakeibo/traineddata`に配置されているため、個人の環境で学習データをダウンロードして**環境変数を通す必要はないです**。
+
+## ビルド方法
+IntelliJ IDEAでプロジェクトをインポートします．その後，File>Project Structure>Project Settings>Artifactsで設定画面を開きます．
++マークを押して，JAR>From modules with dependencies...を押して，Main ClassにはKakeiboを設定します．
+Jar files from librariesはextract to the target JARを選択してOKを押します．Applyしてから設定画面を閉じます．
+
+
+Build>Build Artifacts...>Kakeibo:jar>ReBuildを実行すると，out\artifacts\Kakeibo_jar\Kakeibo.jarが生成されます．
+通常のjarファイルと同様java -jar Kakeibo.jarで起動できます．
