@@ -42,4 +42,4 @@ Jar files from librariesはextract to the target JARを選択してOKを押し�
 
 
 `Build>Build Artifacts...>Kakeibo:jar>ReBuild`を実行すると、`out\artifacts\Kakeibo_jar\Kakeibo.jar`が生成されます。
-通常のjarファイルと同様java -jar Kakeibo.jarで起動できます。
+通常のjarファイルと同様`java -jar Kakeibo.jar`で起動できます。
