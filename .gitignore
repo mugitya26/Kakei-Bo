@@ -44,3 +44,4 @@ build/
 key
 data
 settings.json
+/out/
